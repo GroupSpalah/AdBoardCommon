@@ -21,7 +21,7 @@ public class Phone {
 
     String number;
 
-    @OneToOne
-    @JoinColumn(name = "FK_phone_author")
+    @ManyToOne
+    @JoinColumn(name = "author_id")
     Author author;
 }

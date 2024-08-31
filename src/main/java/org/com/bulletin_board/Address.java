@@ -22,6 +22,6 @@ public class Address {
     String address;
 
     @OneToOne
-    @JoinColumn(name = "FK_address_author")
+    @JoinColumn(name = "author_id")
     Author author;
 }

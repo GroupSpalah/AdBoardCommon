@@ -22,6 +22,6 @@ public class Email {
     String email;
 
     @OneToOne
-    @JoinColumn(name = "FK_email_author")
+    @JoinColumn(name = "author_id")
     Author author;
 }

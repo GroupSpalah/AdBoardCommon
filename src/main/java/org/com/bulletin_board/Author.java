@@ -23,17 +23,15 @@ public class Author {
     @Column(name = "author_id")
     int id;
 
-
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "author")
-    @Column(name = "phone_nambers", length = 20)
+    @OneToMany(mappedBy = "author", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Set<Phone> phoneNumbers;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "author")
+    @OneToOne(mappedBy = "author", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Address address;
 
     String name;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "author")
+    @OneToOne(mappedBy = "author", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Email email;
 
 }
