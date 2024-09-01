@@ -1,4 +1,5 @@
-package org.com.bulletin_board;
+package org.com.ad_board_common.domain;
+
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,22 +7,19 @@ import lombok.experimental.FieldDefaults;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Getter
-@Setter
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Builder
 
 public class Phone {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "phone_id")
-    int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    long id;
 
-    String number;
-
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    Author author;
+    @Column(name = "phone_number")
+    String phoneNumber;
 }

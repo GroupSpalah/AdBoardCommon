@@ -1,4 +1,4 @@
-package org.com.bulletin_board;
+package org.com.ad_board_common.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,22 +6,26 @@ import lombok.experimental.FieldDefaults;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Getter
-@Setter
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Builder
+@ToString(exclude = "author_address")
 
 public class Address {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "address_id")
-    int id;
 
-    String address;
+    @Id
+    @Column(name = "address_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    long id;
+
+    String district;
+
+    String city;
+
+    String street;
 
     @OneToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "FK_author_address")
     Author author;
 }
