@@ -4,18 +4,16 @@
 			 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 
 
-
-    <persistence-unit name="bulletin_board">
+    <persistence-unit name="test-dmytro">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="hibernate.connection.password" value="12345"/>
+            <property name="hibernate.connection.password" value="af66s60dk29l97j;"/>
             <property name="hibernate.connection.url"
-                      value="jdbc:mysql://localhost:3306/adboard?serverTimezone=Europe/Kiev"/>
+                      value="jdbc:mysql://localhost:3306/LearnJPA?serverTimezone=Europe/Kiev"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
         </properties>
     </persistence-unit>
 
