@@ -10,22 +10,15 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "author")
+@ToString
 
-public class Address {
+
+public class Heading {
 
     @Id
-    @Column(name = "address_id")
+    @Column(name = "heading_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
 
-    String district;
-
-    String city;
-
-    String street;
-
-    @OneToOne
-    @JoinColumn(name = "FK_author_address")
-    Author author;
+    String name;
 }
