@@ -1,4 +1,4 @@
-package org.com.bulletin_board;
+package org.com.bulletin_board.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,16 +10,16 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"author"})
 @Builder
 
-public class Address {
+public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "address_id")
+    @Column(name = "email_id")
     int id;
 
-    String address;
+    String email;
 
     @OneToOne
     @JoinColumn(name = "author_id")

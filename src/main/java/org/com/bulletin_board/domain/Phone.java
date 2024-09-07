@@ -1,4 +1,4 @@
-package org.com.bulletin_board;
+package org.com.bulletin_board.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"author"})
 @Builder
 
 public class Phone {

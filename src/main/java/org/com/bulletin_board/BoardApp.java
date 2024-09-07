@@ -6,17 +6,17 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
 import lombok.Cleanup;
+import org.com.bulletin_board.db_connection.Requests;
+import org.com.bulletin_board.domain.*;
+import org.com.bulletin_board.service.impl.AdServiceImpl;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Set;
 
 public class BoardApp {
     public static void main(String[] args) {
-
-        @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("bulletin_board");
-
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        AdServiceImpl asi = new AdServiceImpl();
 
         Address address = Address
                 .builder()
@@ -36,7 +36,8 @@ public class BoardApp {
         Author author = Author
                 .builder()
                 .address(address)
-                .name("Serg")
+                .firstName("Serg")
+                .lastName("Khvostov")
                 .email(email)
                 .phoneNumbers(Set.of(phone))
                 .build();
@@ -45,12 +46,28 @@ public class BoardApp {
         phone.setAuthor(author);
         email.setAuthor(author);
 
-        EntityTransaction transaction = em.getTransaction();
+        Rubric rubric = Rubric
+                .builder()
+                .name("Electronic items")
+                .build();
 
-        transaction.begin();
+        Ad ad = Ad
+                .builder()
+                .name("Sale TV")
+                .publicationDate(LocalDate.of(2024, 8, 07))
+                .adText("Xiaomi TV for sale in good condition.")
+                .price(BigDecimal.valueOf(200))
+                .author(author)
+                .rubric(rubric)
+                .build();
 
-        em.persist(author);
+        //asi.addAd(ad);
+        //asi.getAdById(1);
 
-        transaction.commit();
+        /*Ad ad1 = asi.getAdById(1);
+        ad1.setAdText("LG TV for sale in good condition.");
+        asi.updateAd(ad1);*/
+
+
     }
 }

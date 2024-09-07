@@ -1,10 +1,9 @@
-package org.com.bulletin_board;
+package org.com.bulletin_board.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,7 +12,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"phoneNumbers", "address", "email"})
 @Builder
 
 public class Author {
@@ -23,13 +22,15 @@ public class Author {
     @Column(name = "author_id")
     int id;
 
+    String firstName;
+
+    String lastName;
+
     @OneToMany(mappedBy = "author", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Set<Phone> phoneNumbers;
 
     @OneToOne(mappedBy = "author", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Address address;
-
-    String name;
 
     @OneToOne(mappedBy = "author", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Email email;
