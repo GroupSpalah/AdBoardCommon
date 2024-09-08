@@ -3,15 +3,15 @@ package org.com.ad_board_common.dao.impl;
 
 import jakarta.persistence.*;
 import lombok.Cleanup;
-import org.com.ad_board_common.dao.HeadingDao;
+import org.com.ad_board_common.dao.CrudDAO;
 import org.com.ad_board_common.domain.Heading;
 import org.jetbrains.annotations.NotNull;
 
 import static org.com.ad_board_common.util.ConstantsUtil.*;
 
-public class HeadingDaoImpl implements HeadingDao<Heading> {
+public class HeadingDaoImpl implements CrudDAO<Heading> {
     @Override
-    public void createHeading(Heading heading) {
+    public void create(Heading heading) {
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
         @Cleanup
@@ -25,7 +25,7 @@ public class HeadingDaoImpl implements HeadingDao<Heading> {
     }
 
     @Override
-    public void updateHeading(@NotNull Heading heading) {
+    public void update(@NotNull Heading heading) {
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
         @Cleanup
@@ -44,7 +44,7 @@ public class HeadingDaoImpl implements HeadingDao<Heading> {
     }
 
     @Override
-    public Heading getHeadingById(int id) {
+    public Heading getById(int id) {
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
         @Cleanup
@@ -58,7 +58,7 @@ public class HeadingDaoImpl implements HeadingDao<Heading> {
     }
 
     @Override
-    public void deleteHeading(Heading heading) {
+    public void delete(Heading heading) {
 
     }
 }

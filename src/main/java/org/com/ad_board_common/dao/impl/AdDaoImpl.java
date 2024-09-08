@@ -2,19 +2,17 @@ package org.com.ad_board_common.dao.impl;
 
 import jakarta.persistence.*;
 import lombok.Cleanup;
-import org.com.ad_board_common.dao.AdDao;
+import org.com.ad_board_common.dao.CrudDAO;
 import org.com.ad_board_common.domain.Ad;
 import org.jetbrains.annotations.NotNull;
 
 import static org.com.ad_board_common.util.ConstantsUtil.*;
 
-public class AdDaoImpl implements AdDao<Ad> {
+public class AdDaoImpl implements CrudDAO<Ad> {
     @Override
-    public void createAd(Ad ad) {
+    public void create(Ad ad) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -24,7 +22,7 @@ public class AdDaoImpl implements AdDao<Ad> {
     }
 
     @Override
-    public void updateAd(@NotNull Ad ad) {
+    public void update(@NotNull Ad ad) {
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
         @Cleanup
@@ -48,7 +46,7 @@ public class AdDaoImpl implements AdDao<Ad> {
     }
 
     @Override
-    public Ad getAdById(int id) {
+    public Ad getById(int id) {
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
         @Cleanup
@@ -62,7 +60,7 @@ public class AdDaoImpl implements AdDao<Ad> {
     }
 
     @Override
-    public void deleteAd(Ad ad) {
+    public void delete(Ad ad) {
 
     }
 }

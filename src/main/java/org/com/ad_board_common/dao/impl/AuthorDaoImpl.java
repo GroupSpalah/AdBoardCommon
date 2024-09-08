@@ -2,15 +2,15 @@ package org.com.ad_board_common.dao.impl;
 
 import jakarta.persistence.*;
 import lombok.Cleanup;
-import org.com.ad_board_common.dao.AuthorDao;
+import org.com.ad_board_common.dao.CrudDAO;
 import org.com.ad_board_common.domain.*;
 import org.jetbrains.annotations.NotNull;
 
 import static org.com.ad_board_common.util.ConstantsUtil.*;
 
-public class AuthorDaoImpl implements AuthorDao<Author> {
+public class AuthorDaoImpl implements CrudDAO<Author> {
     @Override
-    public void createAuthor(Author author) {
+    public void create(Author author) {
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
         @Cleanup
@@ -24,7 +24,7 @@ public class AuthorDaoImpl implements AuthorDao<Author> {
     }
 
     @Override
-    public void updateAuthor(@NotNull Author author) {
+    public void update(@NotNull Author author) {
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
         @Cleanup
@@ -47,7 +47,7 @@ public class AuthorDaoImpl implements AuthorDao<Author> {
     }
 
     @Override
-    public Author getAuthorById(int id) {
+    public Author getById(int id) {
         @Cleanup
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
         @Cleanup
@@ -61,7 +61,7 @@ public class AuthorDaoImpl implements AuthorDao<Author> {
     }
 
     @Override
-    public void deleteAuthor(Author author) {
+    public void delete(Author author) {
 
     }
 }

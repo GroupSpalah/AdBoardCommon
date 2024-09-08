@@ -2,7 +2,6 @@ package org.com.ad_board_common.service.impl;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.com.ad_board_common.dao.AdDao;
 import org.com.ad_board_common.dao.impl.AdDaoImpl;
 import org.com.ad_board_common.domain.Ad;
 import org.com.ad_board_common.service.AdService;

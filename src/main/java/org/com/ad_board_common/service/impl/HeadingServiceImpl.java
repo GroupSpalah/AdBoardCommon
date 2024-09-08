@@ -3,7 +3,6 @@ package org.com.ad_board_common.service.impl;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.com.ad_board_common.dao.HeadingDao;
 import org.com.ad_board_common.dao.impl.HeadingDaoImpl;
 import org.com.ad_board_common.domain.Heading;
 import org.com.ad_board_common.service.HeadingService;
