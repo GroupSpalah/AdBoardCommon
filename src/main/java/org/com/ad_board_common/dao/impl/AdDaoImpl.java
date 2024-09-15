@@ -24,23 +24,13 @@ public class AdDaoImpl implements CrudDAO<Ad> {
     @Override
     public void update(@NotNull Ad ad) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        Query query = em.createQuery(UPDATE_AD);
+        em.merge(ad);
 
-        query.setParameter(NAME, ad.getName());
-        query.setParameter(PUBLICATION_DATE, ad.getPublicationDate());
-        query.setParameter(CONTENT, ad.getContent());
-        query.setParameter(PRICE, ad.getPrice());
-        query.setParameter(HEADING, ad.getHeading());
-        query.setParameter(AUTHOR, ad.getAuthor());
-        query.setParameter(AD_ID, ad.getId());
-
-        query.executeUpdate();
+        em.persist(ad);
 
         transaction.commit();
     }
@@ -48,9 +38,7 @@ public class AdDaoImpl implements CrudDAO<Ad> {
     @Override
     public Ad getById(int id) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -60,7 +48,16 @@ public class AdDaoImpl implements CrudDAO<Ad> {
     }
 
     @Override
-    public void delete(Ad ad) {
+    public void delete(Ad ad) { //int id?
+        @Cleanup
+        EntityManager em = FACTORY.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
 
+        TypedQuery<Ad> query = em.createQuery(DELETE_AD, Ad.class);
+        query.setParameter(AD_ID, ad.getId());
+        int deletedRows = query.executeUpdate();
+        System.out.println("Rows deleted: " + deletedRows);
+        transaction.commit();
     }
 }

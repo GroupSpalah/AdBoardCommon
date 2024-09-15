@@ -12,13 +12,11 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
     @Override
     public void create(Author author) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        em.persist(author);
+        em.merge(author);//? merge/persist
 
         transaction.commit();
     }
@@ -26,22 +24,13 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
     @Override
     public void update(@NotNull Author author) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        Query query = em.createQuery(UPDATE_AUTHOR);
+        em.merge(author);
 
-        query.setParameter(FIRST_NAME, author.getFirstName());
-        query.setParameter(LAST_NAME, author.getLastName());
-        query.setParameter(PHONES, author.getPhones());
-        query.setParameter(ADDRESS, author.getAddress());
-        query.setParameter(EMAIL, author.getEmail());
-        query.setParameter(AUTHOR_ID, author.getId());
-
-        query.executeUpdate();
+        em.persist(author);
 
         transaction.commit();
     }
@@ -49,9 +38,7 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
     @Override
     public Author getById(int id) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -62,6 +49,19 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
 
     @Override
     public void delete(Author author) {
+        @Cleanup
+        EntityManager em = FACTORY.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
 
+        Query deleteAd = em.createQuery(DELETE_AD_BY_AUTHOR);
+        deleteAd.setParameter(FK_AD_AUTHOR, author.getId());
+
+
+        Query deleteAuthor = em.createQuery(DELETE_AUTHOR);
+        deleteAuthor.setParameter(AUTHOR_ID, author.getId());
+        int deletedRows = deleteAuthor.executeUpdate();
+        System.out.println("Rows deleted: " + deletedRows);
+        transaction.commit();
     }
 }

@@ -13,9 +13,7 @@ public class HeadingDaoImpl implements CrudDAO<Heading> {
     @Override
     public void create(Heading heading) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -27,18 +25,13 @@ public class HeadingDaoImpl implements CrudDAO<Heading> {
     @Override
     public void update(@NotNull Heading heading) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        Query query = em.createQuery(UPDATE_HEADING);
+        em.merge(heading);
 
-        query.setParameter(NAME, heading.getName());
-        query.setParameter(HEADING_ID, heading.getId());
-
-        query.executeUpdate();
+        em.persist(heading);
 
         transaction.commit();
     }
@@ -46,9 +39,7 @@ public class HeadingDaoImpl implements CrudDAO<Heading> {
     @Override
     public Heading getById(int id) {
         @Cleanup
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(UNIT_NAME);
-        @Cleanup
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -59,6 +50,18 @@ public class HeadingDaoImpl implements CrudDAO<Heading> {
 
     @Override
     public void delete(Heading heading) {
+        @Cleanup
+        EntityManager em = FACTORY.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
 
+        Query deleteAd = em.createQuery(DELETE_AD_BY_HEADING);
+        deleteAd.setParameter(FK_AD_HEADING, heading.getId());
+
+        TypedQuery<Heading> query = em.createQuery(DELETE_HEADING, Heading.class);
+        query.setParameter(HEADING_ID, heading.getId());
+        int deletedRows = query.executeUpdate();
+        System.out.println("Rows deleted: " + deletedRows);
+        transaction.commit();
     }
 }

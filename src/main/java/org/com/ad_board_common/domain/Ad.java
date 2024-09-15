@@ -32,7 +32,7 @@ public class Ad {
     BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "FK_ad_heading")
+    @JoinColumn(name = "FK_ad_heading")//создал heading_id
     Heading heading;
 
     @ManyToOne
