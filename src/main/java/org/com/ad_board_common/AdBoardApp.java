@@ -69,7 +69,8 @@ public class AdBoardApp {
         //headingDao.create(phonesHeading);
         //headingDao.delete(phonesHeading);
         //headingDao.getById(phonesHeading.getId());
-        /**Cannot invoke "org.com.ad_board_common.domain.Heading.toString()" because the return value of "org.com.ad_board_common.dao.CrudDAO.getById(int)" is null
+        /**Cannot invoke "org.com.ad_board_common.domain.Heading.toString()"
+         * because the return value of "org.com.ad_board_common.dao.CrudDAO.getById(int)" is null
          at org.com.ad_board_common.AdBoardApp.main(AdBoardApp.java:69)
          */
 

@@ -9,6 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import static org.com.ad_board_common.util.ConstantsUtil.*;
 
 public class AuthorDaoImpl implements CrudDAO<Author> {
+
+    CrudDAO<Ad> dao;
+
     @Override
     public void create(Author author) {
         @Cleanup
@@ -56,7 +59,6 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
 
         Query deleteAd = em.createQuery(DELETE_AD_BY_AUTHOR);
         deleteAd.setParameter(FK_AD_AUTHOR, author.getId());
-
 
         Query deleteAuthor = em.createQuery(DELETE_AUTHOR);
         deleteAuthor.setParameter(AUTHOR_ID, author.getId());
