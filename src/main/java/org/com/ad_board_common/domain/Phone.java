@@ -22,4 +22,8 @@ public class Phone {
 
     @Column(name = "phone_number")
     String phoneNumber;
+
+/*    @ManyToOne
+    @JoinColumn(name = "FK_Author_Phone", nullable = false)
+    Author author;//? для заполнения null в FK_Author_Phone*/
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import jakarta.persistence.Id;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -28,13 +28,14 @@ public class Author {
     @Column(name = "last_name")
     String lastName;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "FK_author_phone")
-    List<Phone> phones;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}/*, fetch = FetchType.EAGER*/)//?
+    @JoinColumn(name = "FK_Author_Phone")
+    Set<Phone> phones;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "author")
     Address address;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "FK_Author_Email")
     Email email;
 }

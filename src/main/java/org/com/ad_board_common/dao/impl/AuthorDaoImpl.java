@@ -2,15 +2,14 @@ package org.com.ad_board_common.dao.impl;
 
 import jakarta.persistence.*;
 import lombok.Cleanup;
+import org.com.ad_board_common.dao.AdDAO;
 import org.com.ad_board_common.dao.CrudDAO;
 import org.com.ad_board_common.domain.*;
 import org.jetbrains.annotations.NotNull;
 
-import static org.com.ad_board_common.util.ConstantsUtil.*;
-
 public class AuthorDaoImpl implements CrudDAO<Author> {
 
-    CrudDAO<Ad> dao;
+    AdDAO dao = new AdDaoImpl();
 
     @Override
     public void create(Author author) {
@@ -19,7 +18,7 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        em.merge(author);//? merge/persist
+        em.persist(author);
 
         transaction.commit();
     }
@@ -33,8 +32,6 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
 
         em.merge(author);
 
-        em.persist(author);
-
         transaction.commit();
     }
 
@@ -46,24 +43,33 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
         transaction.begin();
 
         Author author = em.find(Author.class, id);
+
         transaction.commit();
+
         return author;
     }
 
     @Override
-    public void delete(Author author) {
+    public void delete(@NotNull Author author) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        Query deleteAd = em.createQuery(DELETE_AD_BY_AUTHOR);
-        deleteAd.setParameter(FK_AD_AUTHOR, author.getId());
+        Author existingAuthor = em.find(Author.class, author.getId());
 
-        Query deleteAuthor = em.createQuery(DELETE_AUTHOR);
-        deleteAuthor.setParameter(AUTHOR_ID, author.getId());
-        int deletedRows = deleteAuthor.executeUpdate();
-        System.out.println("Rows deleted: " + deletedRows);
+        dao.deleteAllAdByAuthorId(existingAuthor.getId());
+
+        Address authorAddress = existingAuthor.getAddress();
+
+        if (authorAddress != null) {
+            em.remove(authorAddress);
+            existingAuthor.setAddress(null);
+            em.merge(existingAuthor);
+        }
+
+        em.remove(existingAuthor);
+
         transaction.commit();
     }
 }

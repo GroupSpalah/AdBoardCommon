@@ -32,10 +32,10 @@ public class Ad {
     BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "FK_Ad_Heading")//создал heading_id
+    @JoinColumn(name = "FK_Ad_Heading")
     Heading heading;
 
     @ManyToOne
-    @JoinColumn(name = "FK_ad_author")
+    @JoinColumn(name = "FK_Ad_Author")
     Author author;
 }

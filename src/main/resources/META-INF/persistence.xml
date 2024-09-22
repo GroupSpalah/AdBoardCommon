@@ -10,9 +10,9 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
             <property name="hibernate.connection.password" value="af66s60dk29l97j;"/>
             <property name="hibernate.connection.url"
-                      value="jdbc:mysql://localhost:3306/LearnJPA?serverTimezone=Europe/Kiev"/>
+                      value="jdbc:mysql://localhost:3306/Learn_JPA_Dmytro?serverTimezone=Europe/Kiev"/>
             <property name="hibernate.connection.username" value="root"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/><!--validate-->
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>

@@ -26,6 +26,6 @@ public class Address {
     String street;
 
     @OneToOne
-    @JoinColumn(name = "FK_author_address")
+    @JoinColumn(name = "FK_Author_Address")
     Author author;
 }
