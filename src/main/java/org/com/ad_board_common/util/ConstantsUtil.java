@@ -53,7 +53,7 @@ public class ConstantsUtil {
             "LEFT JOIN FETCH au.phones " +
             "WHERE a.publicationDate = :publication_date";//можно сделать через DTO?
 
-    public static final String SELECT_ADS_BY_HEADINGS = "SELECT a FROM Ad a " +
+    public static final String SELECT_ADS_BY_HEADINGS = "FROM Ad a " +
             "JOIN FETCH a.heading h " +
             "JOIN FETCH a.author au " +
             "LEFT JOIN FETCH au.phones " +
@@ -64,6 +64,8 @@ public class ConstantsUtil {
             "JOIN FETCH a.author au " +
             "LEFT JOIN FETCH au.phones " +
             "WHERE a.FK_Ad_Author IN :authorId";//можно сделать через DTO?
+
+    public static final String CONCAT = "LIKE CONCAT('%', :word, '%')";//можно сделать через DTO?
 
     public static final String DELETE_AD_BY_HEADING = "DELETE FROM Ad a " +
             "WHERE a.heading = :FK_Ad_Heading";

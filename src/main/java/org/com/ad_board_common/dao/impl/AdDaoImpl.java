@@ -13,7 +13,8 @@ import java.util.List;
 
 import static org.com.ad_board_common.util.ConstantsUtil.*;
 
-public class AdDaoImpl implements CrudDAO<Ad>, AdDAO {
+public class AdDaoImpl implements AdDAO {
+
     @Override
     public void create(Ad ad) {
         @Cleanup

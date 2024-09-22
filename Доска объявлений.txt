@@ -33,8 +33,19 @@ Author
 - обязательно должна присутствовать валидация данных.
 
 TODO:
-1) Delete author's ads, matchingAds, rubrics//+-+
-2) Показывать объявления из одной рубрики и нескольких рубрик.++
-3) Фильтрации(объявления автора, по ключевому слову, по дате).
-4) MatchingAd(DAO, Service)
-5) Перейти на IDENTITY подход
+1) Фильтрации по ключевому слову
+2) MatchingAd(Service)
+3) Перейти на IDENTITY подход
+4) EmailDAO(request for author's email)
+5)
+
+Mad -> Author -> Email
+Mad -> Rubric
+  new Ad(price, name, heading)
+
+  price between priceFrom and priceTo
+  name LIKE subject
+  heading.id = mad.heading.id
+
+6) Add Cascade.REMOVE in Author
+

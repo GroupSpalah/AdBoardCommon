@@ -5,11 +5,14 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Objects;
+
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 @Builder
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = "author")
 @NoArgsConstructor
 @ToString
 
@@ -23,7 +26,8 @@ public class Phone {
     @Column(name = "phone_number")
     String phoneNumber;
 
-/*    @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "FK_Author_Phone", nullable = false)
-    Author author;//? для заполнения null в FK_Author_Phone*/
+    Author author;//? для заполнения null в FK_Author_Phone
+
 }

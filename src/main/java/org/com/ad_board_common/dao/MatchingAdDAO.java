@@ -6,6 +6,7 @@ import org.com.ad_board_common.domain.MatchingAd;
 
 import java.math.BigDecimal;
 
+//delete
 public interface MatchingAdDAO {
 
     void subscribeAuthorToAd(int authorId, Heading heading, BigDecimal priseFrom,

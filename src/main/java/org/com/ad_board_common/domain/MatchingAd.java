@@ -23,11 +23,11 @@ public class MatchingAd {
     int id;
 
     @ManyToOne
-    @JoinColumn(name = "FK_Matching_ad_Author")
+    @JoinColumn(name = "FK_Mad_Author")
     Author author;
 
     @ManyToOne
-    @JoinColumn(name = "FK_Matching_ad_Heading")
+    @JoinColumn(name = "FK_Mad_Heading")
     Heading heading;
 
     @Column(name = "price_from")

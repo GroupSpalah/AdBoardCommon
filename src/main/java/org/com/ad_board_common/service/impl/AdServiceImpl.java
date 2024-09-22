@@ -12,16 +12,18 @@ import org.com.ad_board_common.service.CrudService;
 public class AdServiceImpl implements CrudService<Ad> {
 
     CrudDAO<Ad> AD_DAO = new AdDaoImpl();
+    //EmailDAO emailDao
+
 
     @Override
     public void create(Ad ad) {
         AD_DAO.create(ad);
+        //emailDao.findAllSuitableEmails(ad);
     }
 
     @Override
     public void update(Ad ad) {
         AD_DAO.update(ad);
-
     }
 
     @Override

@@ -5,7 +5,7 @@ import org.com.ad_board_common.domain.Ad;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface AdDAO {
+public interface AdDAO extends CrudDAO<Ad> {
 
     void deleteAllAdByAuthorId(int authorId);
 

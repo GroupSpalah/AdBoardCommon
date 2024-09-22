@@ -11,7 +11,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 public class Email {
 
     @Id
@@ -20,5 +19,5 @@ public class Email {
     int id;
 
     @Column(name = "email_address")
-    String emailAddress;
+    String emailAddress;//rename, sql
 }

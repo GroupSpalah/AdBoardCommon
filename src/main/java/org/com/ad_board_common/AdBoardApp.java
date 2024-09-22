@@ -107,13 +107,15 @@ public class AdBoardApp {
 
 
         //System.out.println(johnPhone.getPhoneNumber());
-        //authorDao.create(john);//++
+
         //authorDao.update(john);++
         //authorDao.delete(john);//(c Ad)++
 
 /*        johnPhone.setAuthor(john);
         johnPhone2.setAuthor(john);
         johnPhone3.setAuthor(john);*/  //--
+
+        //authorDao.create(john);//++
 
         //adDao.create(ad);//++
         //adDao.delete(ad);//++
