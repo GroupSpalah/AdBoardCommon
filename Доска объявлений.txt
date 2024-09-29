@@ -33,9 +33,9 @@ Author
 - обязательно должна присутствовать валидация данных.
 
 TODO:
-1) Фильтрации по ключевому слову
+1) Фильтрации по ключевому слову++
 2) MatchingAd(Service)
-3) Перейти на IDENTITY подход
+3) Перейти на IDENTITY подход++
 4) EmailDAO(request for author's email)
 5)
 
@@ -47,5 +47,5 @@ Mad -> Rubric
   name LIKE subject
   heading.id = mad.heading.id
 
-6) Add Cascade.REMOVE in Author
+6) Add Cascade.REMOVE in Author++
 

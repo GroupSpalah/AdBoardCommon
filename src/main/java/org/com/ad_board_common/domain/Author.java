@@ -12,14 +12,14 @@ import java.util.Set;
 @Data
 @Builder
 @AllArgsConstructor
+//@EqualsAndHashCode(exclude = "phones")
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
+@ToString(exclude = "phones")//для исключения StackOverflowError при выводе
 public class Author {
 
     @Id
     @Column(name = "author_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     @Column(name = "first_name")
@@ -28,14 +28,15 @@ public class Author {
     @Column(name = "last_name")
     String lastName;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}/*, fetch = FetchType.EAGER*/)//?
-    @JoinColumn(name = "FK_Author_Phone")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+
+    @JoinColumn(name = "FK_Phone_Author")
     Set<Phone> phones;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "author")
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "author")
     Address address;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "FK_Author_Email")
     Email email;
 }

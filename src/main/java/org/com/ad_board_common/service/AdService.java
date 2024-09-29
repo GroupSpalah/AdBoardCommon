@@ -1,11 +1,12 @@
-package org.com.ad_board_common.dao;
+package org.com.ad_board_common.service;
 
+import org.com.ad_board_common.dao.CrudDAO;
 import org.com.ad_board_common.domain.Ad;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public interface AdDAO extends CrudDAO<Ad> {
+public interface AdService extends CrudService<Ad> {
 
     void deleteAllAdByAuthorId(int authorId);
 

@@ -15,9 +15,9 @@ public class Email {
 
     @Id
     @Column(name = "email_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     @Column(name = "email_address")
-    String emailAddress;//rename, sql
+    String email;
 }

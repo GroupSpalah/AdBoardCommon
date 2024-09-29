@@ -1,40 +1,35 @@
 package org.com.ad_board_common;
 
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import lombok.Cleanup;
-import org.com.ad_board_common.dao.AdDAO;
-import org.com.ad_board_common.dao.CrudDAO;
-import org.com.ad_board_common.dao.impl.AdDaoImpl;
-import org.com.ad_board_common.dao.impl.AuthorDaoImpl;
-import org.com.ad_board_common.dao.impl.HeadingDaoImpl;
 import org.com.ad_board_common.domain.*;
+import org.com.ad_board_common.service.AdService;
+import org.com.ad_board_common.service.CrudService;
+import org.com.ad_board_common.service.impl.AdServiceImpl;
+import org.com.ad_board_common.service.impl.AuthorServiceImpl;
+import org.com.ad_board_common.service.impl.HeadingServiceImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.com.ad_board_common.dao.CrudDAO.FACTORY;
 
 public class AdBoardApp {
     public static void main(String[] args) {
 
-        CrudDAO<Heading> headingDao = new HeadingDaoImpl();
-        CrudDAO<Author> authorDao = new AuthorDaoImpl();
-        CrudDAO<Ad> adDao = new AdDaoImpl();
-        AdDAO adDao2 = new AdDaoImpl();
+        CrudService<Heading> headingCrudService = new HeadingServiceImpl();
+        CrudService<Author> authorCrudService = new AuthorServiceImpl();
+        AdService adService = new AdServiceImpl();
 
         Email johnEmail = Email
                 .builder()
-                .emailAddress("john_dou@gmail.com")
+                //.id(1202)
+                .email("john_travolta@gmail.com")
                 .build();
 
         Address johnAddress = Address
                 .builder()
+                //.id(602)
                 .district("Columbia")
                 .city("Washington")
                 .street("20 avenue")
@@ -42,17 +37,17 @@ public class AdBoardApp {
 
         Phone johnPhone = Phone
                 .builder()
-                //.id(502)
+                //.id(402)
                 .phoneNumber("0987654321")//не работает, передает NUll в поле автора
                 .build();
         Phone johnPhone2 = Phone
                 .builder()
-                //.id(503)
+                //.id(403)
                 .phoneNumber("0937654321")//не работает, передает NUll в поле автора
                 .build();
         Phone johnPhone3 = Phone
                 .builder()
-                //.id(504)
+                //.id(404)
                 .phoneNumber("0957654321")//не работает, передает NUll в поле автора
                 .build();
 
@@ -64,66 +59,53 @@ public class AdBoardApp {
 
         Author john = Author
                 .builder()
-                .id(53)
+                //.id(1152)
                 .firstName("John")
-                .lastName("Dou")
-                .address(johnAddress)//null
+                .lastName("Travolta")
+                .address(johnAddress)
                 .email(johnEmail)
                 .phones(phones)
                 .build();
 
         johnAddress.setAuthor(john);
 
-
+        johnPhone.setAuthor(john);
+        johnPhone2.setAuthor(john);
+        johnPhone3.setAuthor(john);
 
         Heading phonesHeading = Heading
                 .builder()
-                .id(52)
+                //.id(1)
                 .name("Phones")
                 .build();
 
-        //@Cleanup
-        //EntityManager em = FACTORY.createEntityManager();
-        //Heading existingHeading = em.find(Heading.class, phonesHeading.getId());//без этого ссылается на временную сущность
-        //Author existingAuthor = em.find(Author.class, john.getId());
-
-
-
-
         Ad ad = Ad
                 .builder()
+                //.id(602)
                 .heading(phonesHeading)
-                .name("Sale IPhone")
+                .name("Sale IPhone 16")
                 .publicationDate(LocalDate.now())
                 .price(BigDecimal.valueOf(999.99))
-                .content("Selling iPhone 12, satisfactory condition, 70% battery, call for details.")
+                .content("Selling iPhone 16, NEW")
                 .author(john)
                 .build();
 
+        //headingCrudService.create(phonesHeading);//++
+        //headingCrudService.delete(phonesHeading);//++
+        //System.out.println(headingCrudService.getById(52).toString());//++
 
-        //headingDao.create(phonesHeading);//++
-        //headingDao.delete(phonesHeading);//++
-        //System.out.println(headingDao.getById(52).toString());//++
-
-
-        //System.out.println(johnPhone.getPhoneNumber());
-
-        //authorDao.update(john);++
-        //authorDao.delete(john);//(c Ad)++
-
-/*        johnPhone.setAuthor(john);
-        johnPhone2.setAuthor(john);
-        johnPhone3.setAuthor(john);*/  //--
-
-        //authorDao.create(john);//++
-
-        //adDao.create(ad);//++
-        //adDao.delete(ad);//++
-        //System.out.println(adDao2.getAdsByHeadings(Collections.singletonList(2)));//++
-        //System.out.println(adDao2.getAdsByHeadings(Arrays.asList(2, 52)));//++
-        //System.out.println(adDao2.getAdsByPublicationDate(LocalDate.now()));//++
-        //System.out.println(adDao2.getAdsByAuthor(53));//--
-
+        //authorCrudService.create(john);//++
+        //authorCrudService.update(john);//++
+        //authorCrudService.delete(john);//(c Ad)++ не удаляет соответствующие автору телефоны и адреса
+        //adService.create(ad);//++
+        //adService.delete(ad);//++
+        //System.out.println(adService.getAdsByHeadings(Collections.singletonList(2)));//++
+        //System.out.println(adService.getAdsByHeadings(Arrays.asList(2, 52)));//++
+        //System.out.println(adService.getAdsByPublicationDate(LocalDate.of(2024, 9, 28)));//++
+        //System.out.println(adService.getAdsByAuthor(1152));//++
+        //System.out.println(adService.getAdsByKeyword("new"));//++
+        //System.out.println(john.getEmail());//??
+        //System.out.println(john.getPhones());
 
     }
 }

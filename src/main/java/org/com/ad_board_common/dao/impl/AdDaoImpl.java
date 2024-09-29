@@ -3,9 +3,7 @@ package org.com.ad_board_common.dao.impl;
 import jakarta.persistence.*;
 import lombok.Cleanup;
 import org.com.ad_board_common.dao.AdDAO;
-import org.com.ad_board_common.dao.CrudDAO;
 import org.com.ad_board_common.domain.Ad;
-import org.com.ad_board_common.domain.Author;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
@@ -123,7 +121,18 @@ public class AdDaoImpl implements AdDAO {
         EntityManager em = FACTORY.createEntityManager();
 
         TypedQuery<Ad> query = em.createQuery(SELECT_ADS_BY_AUTHOR_ID, Ad.class);
-        query.setParameter(AUTHOR_ID, authorId);
+        query.setParameter(FK_AD_AUTHOR, authorId);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Ad> getAdsByKeyword(String keyWord) {
+        @Cleanup
+        EntityManager em = FACTORY.createEntityManager();
+
+        TypedQuery<Ad> query = em.createQuery(SELECT_ADS_BY_BY_KEYWORD, Ad.class);
+        query.setParameter(WORD, keyWord);
 
         return query.getResultList();
     }

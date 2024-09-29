@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 public class MatchingAd {
 
     @Id
-    @Column(name = "matching_ad_id")
+    @Column(name = "mad_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
@@ -31,10 +31,10 @@ public class MatchingAd {
     Heading heading;
 
     @Column(name = "price_from")
-    BigDecimal priseFrom;
+    BigDecimal priceFrom;
 
     @Column(name = "price_to")
-    BigDecimal priseTo;
+    BigDecimal priceTo;
 
     String subject;
 }

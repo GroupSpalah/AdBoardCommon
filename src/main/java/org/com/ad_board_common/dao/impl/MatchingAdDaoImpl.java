@@ -1,13 +1,12 @@
 package org.com.ad_board_common.dao.impl;
 
-import org.com.ad_board_common.dao.CrudDAO;
 import org.com.ad_board_common.dao.MatchingAdDAO;
 import org.com.ad_board_common.domain.Heading;
 import org.com.ad_board_common.domain.MatchingAd;
 
 import java.math.BigDecimal;
 
-public class MatchingAdDaoImpl implements CrudDAO<MatchingAd>, MatchingAdDAO {
+public class MatchingAdDaoImpl implements MatchingAdDAO {
     @Override
     public void create(MatchingAd obj) {
 

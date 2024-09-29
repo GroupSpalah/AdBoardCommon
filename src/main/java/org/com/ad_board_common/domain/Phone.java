@@ -20,14 +20,13 @@ public class Phone {
 
     @Id
     @Column(name = "phone_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     @Column(name = "phone_number")
     String phoneNumber;
 
     @ManyToOne
-    @JoinColumn(name = "FK_Author_Phone", nullable = false)
-    Author author;//? для заполнения null в FK_Author_Phone
-
+    @JoinColumn(name = "FK_Phone_Author", nullable = false)
+    Author author;//? для заполнения null в FK_Phone_Author++
 }

@@ -19,7 +19,7 @@ public class Ad {
 
     @Id
     @Column(name = "ad_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     String name;

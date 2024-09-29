@@ -5,6 +5,7 @@ public class ConstantsUtil {
     public static final String PRICE = "price";
     public static final String HEADING = "heading";
     public static final String AUTHOR = "author";
+    public static final String WORD = "word";
     public static final String CONTENT = "content";
     public static final String NAME = "name";
     public static final String PHONES = "phones";
@@ -29,7 +30,7 @@ public class ConstantsUtil {
                     "WHERE a.id = :ad_id";
 
     public static String UPDATE_AUTHOR =
-            "UPDATE Author a SET a.firstName = :first_name, a.lastName = :last_name, a.phones = :FK_Author_Phone, " +
+            "UPDATE Author a SET a.firstName = :first_name, a.lastName = :last_name, a.phones = :FK_Phone_Author, " +
                     "a.address = :address, a.email = :email" +
                     "WHERE a.id = :author_id";
     public static final String DELETE_AD = "DELETE FROM Ad a " +
@@ -47,25 +48,32 @@ public class ConstantsUtil {
     public static final String DELETE_ADS_BY_HEADING = "DELETE FROM Ad a " +
             "WHERE a.heading.id = :FK_Ad_Heading";
 
-    public static final String SELECT_ADS_BY_PUBLICATION_DATE = "SELECT a FROM Ad a " +
+    public static final String SELECT_ADS_BY_PUBLICATION_DATE = "FROM Ad a " +
             "JOIN FETCH a.heading h " +
             "JOIN FETCH a.author au " +
-            "LEFT JOIN FETCH au.phones " +
+            "JOIN FETCH au.phones " +
             "WHERE a.publicationDate = :publication_date";//можно сделать через DTO?
 
     public static final String SELECT_ADS_BY_HEADINGS = "FROM Ad a " +
             "JOIN FETCH a.heading h " +
             "JOIN FETCH a.author au " +
-            "LEFT JOIN FETCH au.phones " +
-            "WHERE h.id IN :heading_ids";//можно сделать через DTO?
+            "JOIN FETCH au.phones " +
+            "WHERE h.id IN :heading_ids";
 
-    public static final String SELECT_ADS_BY_AUTHOR_ID = "SELECT a FROM Ad a " +
+    public static final String SELECT_ADS_BY_AUTHOR_ID = "FROM Ad a " +
             "JOIN FETCH a.heading h " +
             "JOIN FETCH a.author au " +
-            "LEFT JOIN FETCH au.phones " +
-            "WHERE a.FK_Ad_Author IN :authorId";//можно сделать через DTO?
+            "JOIN FETCH au.phones " +
+            "WHERE a.author.id IN :FK_Ad_Author";
 
-    public static final String CONCAT = "LIKE CONCAT('%', :word, '%')";//можно сделать через DTO?
+    public static final String SELECT_ADS_BY_BY_KEYWORD = "FROM Ad a " +
+            "JOIN FETCH a.heading h " +
+            "JOIN FETCH a.author au " +
+            "JOIN FETCH au.phones " +
+            "WHERE a.content " +
+            "LIKE CONCAT('%', :word, '%')";
+
+    public static final String CONCAT = "LIKE CONCAT('%', :word, '%')";
 
     public static final String DELETE_AD_BY_HEADING = "DELETE FROM Ad a " +
             "WHERE a.heading = :FK_Ad_Heading";

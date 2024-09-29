@@ -17,7 +17,7 @@ public class Heading {
 
     @Id
     @Column(name = "heading_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     String name;

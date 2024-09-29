@@ -16,7 +16,7 @@ public class Address {
 
     @Id
     @Column(name = "address_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     String district;
@@ -26,6 +26,6 @@ public class Address {
     String street;
 
     @OneToOne
-    @JoinColumn(name = "FK_Author_Address")
+    @JoinColumn(name = "FK_Address_Author")
     Author author;
 }
