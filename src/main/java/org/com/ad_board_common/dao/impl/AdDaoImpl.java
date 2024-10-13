@@ -23,6 +23,7 @@ public class AdDaoImpl implements AdDAO {
         em.persist(ad);
 
         transaction.commit();
+        //emailDao.getEmails() -> List<String>
     }
 
     @Override
