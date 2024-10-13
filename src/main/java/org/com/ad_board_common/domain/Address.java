@@ -27,5 +27,6 @@ public class Address {
 
     @OneToOne
     @JoinColumn(name = "FK_Address_Author")
+    @EqualsAndHashCode.Exclude
     Author author;
 }

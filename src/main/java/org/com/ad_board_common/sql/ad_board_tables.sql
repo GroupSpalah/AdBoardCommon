@@ -45,7 +45,8 @@ CREATE TABLE Ad (
     content TEXT,
     price DECIMAL(10, 2),
     FK_Ad_Heading INT, 
-    FK_Ad_Author INT 
+    FK_Ad_Author INT,
+    is_active BOOLEAN
 );
 
 -- Table for Matching_ad

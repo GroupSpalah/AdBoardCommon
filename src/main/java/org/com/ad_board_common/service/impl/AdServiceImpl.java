@@ -1,27 +1,41 @@
 package org.com.ad_board_common.service.impl;
 
 import lombok.AccessLevel;
+import lombok.Cleanup;
 import lombok.experimental.FieldDefaults;
 import org.com.ad_board_common.dao.AdDAO;
+import org.com.ad_board_common.dao.EmailDAO;
 import org.com.ad_board_common.dao.impl.AdDaoImpl;
+import org.com.ad_board_common.dao.impl.EmailDaoImpl;
 import org.com.ad_board_common.domain.Ad;
+import org.com.ad_board_common.domain.Email;
 import org.com.ad_board_common.service.AdService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 
 public class AdServiceImpl implements AdService {
 
+    EmailDAO EMAIL_DAO = new EmailDaoImpl();
     AdDAO AD_DAO = new AdDaoImpl();
-    //EmailDAO emailDao
 
+    public AdServiceImpl() {
+        @Cleanup
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(this::deleteInactiveAds, 0, 2, TimeUnit.MINUTES);
+    }
 
     @Override
     public void create(Ad ad) {
         AD_DAO.create(ad);
-        //emailDao.findAllSuitableEmails(ad);
+        Set<Email> allSuitableEmails = EMAIL_DAO.findAllSuitableEmails(ad);
+        System.out.println(allSuitableEmails);
     }
 
     @Override
@@ -40,12 +54,12 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public void deleteAllAdByAuthorId(int authorId) {//объединить?
+    public void deleteAllAdByAuthorId(int authorId) {
         AD_DAO.deleteAllAdByAuthorId(authorId);
     }
 
     @Override
-    public void deleteAllAdByHeadingId(int authorId) {//объединить?
+    public void deleteAllAdByHeadingId(int authorId) {
         AD_DAO.deleteAllAdByHeadingId(authorId);
     }
 
@@ -69,4 +83,7 @@ public class AdServiceImpl implements AdService {
         return AD_DAO.getAdsByKeyword(keyWord);
     }
 
+    public void deleteInactiveAds() {
+        AD_DAO.deleteInactiveAds();
+    }
 }

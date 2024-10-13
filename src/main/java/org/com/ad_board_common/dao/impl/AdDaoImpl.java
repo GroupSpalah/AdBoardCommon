@@ -79,14 +79,29 @@ public class AdDaoImpl implements AdDAO {
     }
 
     @Override
-    public void deleteAllAdByHeadingId(int authorId) {//объединить?
+    public void deleteAllAdByHeadingId(int headingId) {//объединить?
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
         Query query = em.createQuery(DELETE_ADS_BY_HEADING);
-        query.setParameter(FK_AD_HEADING, authorId);
+        query.setParameter(FK_AD_HEADING, headingId);
+
+        int deletedRows = query.executeUpdate();
+        System.out.println("Rows deleted: " + deletedRows);
+        transaction.commit();
+    }
+
+    @Override
+    public void deleteInactiveAds() {
+        @Cleanup
+        EntityManager em = FACTORY.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+
+        Query query = em.createQuery(DELETE_INACTIVE_ADS);
+        //query.setParameter(IS_ACTIVE, false);
 
         int deletedRows = query.executeUpdate();
         System.out.println("Rows deleted: " + deletedRows);

@@ -4,17 +4,14 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.com.ad_board_common.dao.MatchingAdDAO;
 import org.com.ad_board_common.dao.impl.MatchingAdDaoImpl;
-import org.com.ad_board_common.domain.Heading;
 import org.com.ad_board_common.domain.MatchingAd;
 import org.com.ad_board_common.service.MatchingAdService;
-
-import java.math.BigDecimal;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 
 public class MatchingAdServiceImpl implements MatchingAdService {
 
-    private MatchingAdDAO MATCHING_AD_DAO = new MatchingAdDaoImpl();
+    MatchingAdDAO MATCHING_AD_DAO = new MatchingAdDaoImpl();
 
     @Override
     public void create(MatchingAd matchingAd) {
@@ -37,9 +34,12 @@ public class MatchingAdServiceImpl implements MatchingAdService {
     }
 
     @Override
-    public void subscribeAuthorToAd(int authorId, Heading heading, BigDecimal priseFrom,
-                                    BigDecimal priseTo, String wordToSearch) {
-        MATCHING_AD_DAO.subscribeAuthorToAd(authorId, heading, priseFrom, priseTo, wordToSearch);
+    public void deleteAllAdByAuthorId(int authorId) {
+        MATCHING_AD_DAO.deleteAllAdByAuthorId(authorId);
     }
 
+    @Override
+    public void deleteAllAdByHeadingId(int headingId) {
+        MATCHING_AD_DAO.deleteAllAdByHeadingId(headingId);
+    }
 }

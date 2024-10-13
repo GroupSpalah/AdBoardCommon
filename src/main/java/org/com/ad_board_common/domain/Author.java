@@ -12,9 +12,8 @@ import java.util.Set;
 @Data
 @Builder
 @AllArgsConstructor
-//@EqualsAndHashCode(exclude = "phones")
 @NoArgsConstructor
-@ToString(exclude = "phones")//для исключения StackOverflowError при выводе
+@ToString(exclude = "phones")
 public class Author {
 
     @Id
@@ -34,6 +33,7 @@ public class Author {
     Set<Phone> phones;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "author")
+    @EqualsAndHashCode.Exclude
     Address address;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})

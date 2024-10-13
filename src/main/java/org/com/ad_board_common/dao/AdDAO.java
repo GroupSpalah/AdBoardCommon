@@ -11,6 +11,8 @@ public interface AdDAO extends CrudDAO<Ad> {
 
     void deleteAllAdByHeadingId(int headingId);
 
+    void deleteInactiveAds();
+
     List<Ad> getAdsByHeadings(List<Integer> headingIds);
 
     List<Ad> getAdsByPublicationDate(LocalDate publicationDate);
