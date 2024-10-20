@@ -11,12 +11,10 @@ import java.time.LocalDate;
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data//изучить
-@Getter
-@Setter
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@EqualsAndHashCode(callSuper = true)
 @DiscriminatorValue(value = "ad")
 public class Ad extends AbstractAd {
 

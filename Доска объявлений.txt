@@ -33,4 +33,6 @@ Author
 - обязательно должна присутствовать валидация данных.
 
 TODO:
-1) Use inheritance
+1) Use @Version
+2) ThreadLocal for Entitymanager(read)
+3) Refactor CRUDDao, using common methods

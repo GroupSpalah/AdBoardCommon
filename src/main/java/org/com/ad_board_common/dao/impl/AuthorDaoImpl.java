@@ -18,7 +18,7 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
 
     MatchingAdDAO MATCHING_AD_DAO = new MatchingAdDaoImpl();
 
-    @Override
+    /*@Override
     public void create(Author author) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -28,7 +28,7 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
         em.persist(author);
 
         transaction.commit();
-    }
+    }*/
 
     @Override
     public void update(@NotNull Author author) {
