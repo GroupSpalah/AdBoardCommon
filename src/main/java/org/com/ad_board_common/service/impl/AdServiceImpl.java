@@ -1,7 +1,6 @@
 package org.com.ad_board_common.service.impl;
 
 import lombok.AccessLevel;
-import lombok.Cleanup;
 import lombok.experimental.FieldDefaults;
 import org.com.ad_board_common.dao.AdDAO;
 import org.com.ad_board_common.dao.EmailDAO;
@@ -14,9 +13,6 @@ import org.com.ad_board_common.service.AdService;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 
@@ -24,12 +20,6 @@ public class AdServiceImpl implements AdService {
 
     EmailDAO EMAIL_DAO = new EmailDaoImpl();
     AdDAO AD_DAO = new AdDaoImpl();
-
-    public AdServiceImpl() {
-        @Cleanup
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(this::deleteInactiveAds, 0, 2, TimeUnit.MINUTES);
-    }
 
     @Override
     public void create(Ad ad) {

@@ -9,7 +9,7 @@ import org.com.ad_board_common.domain.MatchingAd;
 
 import static org.com.ad_board_common.util.ConstantsUtil.*;
 
-//Test all:--
+//Test all:++
 
 public class MatchingAdDaoImpl implements MatchingAdDAO { //SavedSearch
 

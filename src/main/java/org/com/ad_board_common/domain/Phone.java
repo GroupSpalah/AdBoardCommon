@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Objects;
-
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data

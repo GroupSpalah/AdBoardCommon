@@ -1,6 +1,8 @@
 package org.com.ad_board_common;
 
 
+import org.com.ad_board_common.dao.EmailDAO;
+import org.com.ad_board_common.dao.impl.EmailDaoImpl;
 import org.com.ad_board_common.domain.*;
 import org.com.ad_board_common.service.AdService;
 import org.com.ad_board_common.service.CrudService;
@@ -144,21 +146,21 @@ public class AdBoardApp {
                 .heading(phonesHeading)
                 .name("Sale Xiaomi 15")
                 .publicationDate(LocalDate.now())
-                .price(BigDecimal.valueOf(1000))
+                .price(BigDecimal.valueOf(2000))
                 .content("Selling Xiaomi 15")
                 .author(john)
                 .build();
 
         Ad ad2 = Ad
                 .builder()
-                //.id(3)
+                .id(8)
                 .heading(phonesHeading)
                 .name("Sale IPhone 13")
                 .publicationDate(LocalDate.now())
                 .price(BigDecimal.valueOf(800))
                 .content("Selling iPhone 13, NEW")
                 .author(john)
-                //.isActive(true)
+                .isActive(false)//++
                 .build();
 
         //headingCrudService.create(phonesHeading);//++
@@ -172,8 +174,9 @@ public class AdBoardApp {
         /*проверить удаление с (mAd)*/
         //authorCrudService.delete(john);//(with Ad & mAd)++
         
-        adService.create(ad2);//++
+        //adService.create(ad2);//++
         //adService.update(ad2);//++
+        //adService.deleteInactiveAds();//++
         ///System.out.println(adService.getById(1));//++
         //adService.delete(ad);//++
         //System.out.println(adService.getAdsByHeadings(Collections.singletonList(2)));//++
@@ -189,7 +192,7 @@ public class AdBoardApp {
                 //.heading(phonesHeading)
                 .subject("IPhone")
                 //.priceFrom(BigDecimal.valueOf(0))
-                //.priceTo(BigDecimal.valueOf(1000))
+                .priceTo(BigDecimal.valueOf(1000))
                 .build();
 
         MatchingAd matchingAdJack1 = MatchingAd.builder()
@@ -219,8 +222,11 @@ public class AdBoardApp {
                 .build();
         //mAdService.create(matchingAdJohn2);++
 
-/*        Set<Email> emails = mAdService.adVerification(ad2);//++
-        System.out.println(emails);*/
+        EmailDAO EMAIL_DAO = new EmailDaoImpl();
+
+
+        //Set<Email> emails = EMAIL_DAO.findAllSuitableEmails(ad2);//++
+        //System.out.println(emails);
 
         //mAdService.create(matchingAdJohn2);//работает с полным или частичным совпадением.
         //выводит результат по любому кол-ву установленных фильтров.

@@ -3,24 +3,28 @@ package org.com.ad_board_common.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data
-@Builder
+@Data//изучить
+@Getter
+@Setter
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@DiscriminatorValue(value = "m_ad")
+public class MatchingAd extends AbstractAd {
 
-@Table(name = "matching_ad")
-public class MatchingAd {
+//@Table(name = "matching_ad")//поменять в запросе
 
-    @Id
+/*    @Id
     @Column(name = "mad_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    int id;*/
 
     @ManyToOne
     @JoinColumn(name = "FK_Mad_Author")

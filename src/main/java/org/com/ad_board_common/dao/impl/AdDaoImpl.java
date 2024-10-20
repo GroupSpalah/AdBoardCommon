@@ -23,7 +23,6 @@ public class AdDaoImpl implements AdDAO {
         em.persist(ad);
 
         transaction.commit();
-        //emailDao.getEmails() -> List<String>
     }
 
     @Override
@@ -94,6 +93,30 @@ public class AdDaoImpl implements AdDAO {
         transaction.commit();
     }
 
+/*    @Override
+    public void deleteAllAdByAuthorId(int authorId) {
+        deleteAllAdByParam(DELETE_MADS_BY_AUTHOR, FK_MAD_AUTHOR, authorId);
+    }
+
+    @Override
+    public void deleteAllAdByHeadingId(int headingId) {
+        deleteAllAdByParam(DELETE_MADS_BY_HEADING, FK_MAD_HEADING, headingId);
+    }
+
+    private void deleteAllAdByParam(String request, String columnName, int id) {
+        @Cleanup
+        EntityManager em = FACTORY.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+
+        Query query = em.createQuery(request);
+        query.setParameter(columnName, id);
+
+        int deletedRows = query.executeUpdate();
+        System.out.println("Rows deleted: " + deletedRows);
+        transaction.commit();
+    }*/
+
     @Override
     public void deleteInactiveAds() {
         @Cleanup
@@ -102,7 +125,6 @@ public class AdDaoImpl implements AdDAO {
         transaction.begin();
 
         Query query = em.createQuery(DELETE_INACTIVE_ADS);
-        //query.setParameter(IS_ACTIVE, false);
 
         int deletedRows = query.executeUpdate();
         System.out.println("Rows deleted: " + deletedRows);

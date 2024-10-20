@@ -97,7 +97,7 @@ public class ConstantsUtil {
             "WHERE h.id = :heading_id";
 
     public static final String SELECT_MADS_BY_PARAMS =
-            "SELECT ma.author.email. FROM MatchingAd ma " +
+            "SELECT ma.author.email FROM MatchingAd ma " +
                     "WHERE (ma.heading IS NULL OR ma.heading.id = :headingId) " +
                     "AND (ma.priceFrom IS NULL OR ma.priceFrom <= :price)" +
                     "AND (ma.priceTo IS NULL OR ma.priceTo >= :price)" +
