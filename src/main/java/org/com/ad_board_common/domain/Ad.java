@@ -4,24 +4,23 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.DialectOverride;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data//изучить
+@Data//изучить. Возможно использовать альтернативные аннотации
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-@DiscriminatorValue(value = "ad")
-public class Ad extends AbstractAd {
+public class Ad {
 
-/*    @Id
-    @Column(name = "ad_id")//поменять запросы
+    @Id
+    @Column(name = "ad_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;*/
+    int id;
 
     String name;
 
@@ -42,4 +41,7 @@ public class Ad extends AbstractAd {
 
     @Column(name = "is_active")
     boolean isActive;
+
+    @Version
+    int version;
 }

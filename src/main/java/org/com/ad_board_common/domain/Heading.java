@@ -10,8 +10,6 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-
 
 public class Heading {
 
@@ -21,4 +19,7 @@ public class Heading {
     int id;
 
     String name;
+
+    @Version
+    int version;
 }

@@ -8,12 +8,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import static org.com.ad_board_common.util.ConstantsUtil.*;
 
 public class AdDaoImpl implements AdDAO {
 
-    @Override
+/*    @Override
     public void create(Ad ad) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -47,12 +48,11 @@ public class AdDaoImpl implements AdDAO {
         Ad ad = em.find(Ad.class, id);
         transaction.commit();
         return ad;
-    }
+    }*/
 
     @Override
     public void delete(@NotNull Ad ad) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
+        @Cleanup EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -63,7 +63,7 @@ public class AdDaoImpl implements AdDAO {
         transaction.commit();
     }
 
-    @Override
+/*    @Override
     public void deleteAllAdByAuthorId(int authorId) {//объединить?
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -91,21 +91,20 @@ public class AdDaoImpl implements AdDAO {
         int deletedRows = query.executeUpdate();
         System.out.println("Rows deleted: " + deletedRows);
         transaction.commit();
-    }
+    }*/
 
-/*    @Override
+    @Override
     public void deleteAllAdByAuthorId(int authorId) {
-        deleteAllAdByParam(DELETE_MADS_BY_AUTHOR, FK_MAD_AUTHOR, authorId);
+        deleteAllAdByParam(DELETE_ADS_BY_AUTHOR, FK_AD_AUTHOR, authorId);
     }
 
     @Override
     public void deleteAllAdByHeadingId(int headingId) {
-        deleteAllAdByParam(DELETE_MADS_BY_HEADING, FK_MAD_HEADING, headingId);
+        deleteAllAdByParam(DELETE_ADS_BY_HEADING, FK_AD_HEADING, headingId);
     }
 
     private void deleteAllAdByParam(String request, String columnName, int id) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
+        @Cleanup EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -115,12 +114,11 @@ public class AdDaoImpl implements AdDAO {
         int deletedRows = query.executeUpdate();
         System.out.println("Rows deleted: " + deletedRows);
         transaction.commit();
-    }*/
+    }
 
     @Override
     public void deleteInactiveAds() {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
+        @Cleanup EntityManager em = FACTORY.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -131,46 +129,75 @@ public class AdDaoImpl implements AdDAO {
         transaction.commit();
     }
 
-    @Override
+/*    @Override
     public List<Ad> getAdsByHeadings(List<Integer> headingIds) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
+        @Cleanup EntityManager em = FACTORY.createEntityManager();
 
         TypedQuery<Ad> query = em.createQuery(SELECT_ADS_BY_HEADINGS, Ad.class);
         query.setParameter(HEADING_IDS, headingIds);
 
         return query.getResultList();
-    }
+    }*/
 
     @Override
+    public List<Ad> getAdsByHeadings(List<Integer> headingIds) {
+
+        return getAdsByParam(SELECT_ADS_BY_HEADINGS, HEADING_IDS, headingIds);
+    }
+
+/*    @Override
     public List<Ad> getAdsByPublicationDate(LocalDate publicationDate) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
+        @Cleanup EntityManager em = FACTORY.createEntityManager();
 
         TypedQuery<Ad> query = em.createQuery(SELECT_ADS_BY_PUBLICATION_DATE, Ad.class);
         query.setParameter(PUBLICATION_DATE, publicationDate);
 
         return query.getResultList();
-    }
+    }*/
 
     @Override
+    public List<Ad> getAdsByPublicationDate(LocalDate publicationDate) {
+
+        return getAdsByParam(SELECT_ADS_BY_PUBLICATION_DATE, PUBLICATION_DATE, publicationDate);
+    }
+
+/*    @Override
     public List<Ad> getAdsByAuthor(int authorId) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
+        @Cleanup EntityManager em = FACTORY.createEntityManager();
 
         TypedQuery<Ad> query = em.createQuery(SELECT_ADS_BY_AUTHOR_ID, Ad.class);
         query.setParameter(FK_AD_AUTHOR, authorId);
 
         return query.getResultList();
-    }
+    }*/
 
     @Override
+    public List<Ad> getAdsByAuthor(int authorId) {
+
+        return getAdsByParam(SELECT_ADS_BY_AUTHOR_ID, FK_AD_AUTHOR, authorId);
+    }
+
+/*    @Override
     public List<Ad> getAdsByKeyword(String keyWord) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
+        @Cleanup EntityManager em = FACTORY.createEntityManager();
 
         TypedQuery<Ad> query = em.createQuery(SELECT_ADS_BY_BY_KEYWORD, Ad.class);
         query.setParameter(WORD, keyWord);
+
+        return query.getResultList();
+    }*/
+
+    @Override
+    public List<Ad> getAdsByKeyword(String keyWord) {
+
+        return getAdsByParam(SELECT_ADS_BY_BY_KEYWORD, WORD, keyWord);
+    }
+
+    private List<Ad> getAdsByParam(String request, String columnName, Object obj) {
+        @Cleanup EntityManager em = FACTORY.createEntityManager();
+
+        TypedQuery<Ad> query = em.createQuery(request, Ad.class);
+        query.setParameter(columnName, obj);
 
         return query.getResultList();
     }

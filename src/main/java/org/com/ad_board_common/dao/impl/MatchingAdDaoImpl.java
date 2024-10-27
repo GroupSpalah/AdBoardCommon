@@ -13,7 +13,7 @@ import static org.com.ad_board_common.util.ConstantsUtil.*;
 
 public class MatchingAdDaoImpl implements MatchingAdDAO { //SavedSearch
 
-    @Override
+/*    @Override
     public void create(MatchingAd mAd) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -47,7 +47,7 @@ public class MatchingAdDaoImpl implements MatchingAdDAO { //SavedSearch
         MatchingAd mAd = em.find(MatchingAd.class, id);
         transaction.commit();
         return mAd;
-    }
+    }*/
 
     @Override
     public void delete(MatchingAd mAd) {

@@ -19,7 +19,7 @@ public class HeadingDaoImpl implements CrudDAO<Heading> {
 
     MatchingAdDAO MATCHING_AD_DAO = new MatchingAdDaoImpl();
 
-    @Override
+/*    @Override
     public void create(Heading heading) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -55,7 +55,7 @@ public class HeadingDaoImpl implements CrudDAO<Heading> {
         transaction.commit();
 
         return heading;
-    }
+    }*/
 
     @Override
     public void delete(@NotNull Heading heading) {

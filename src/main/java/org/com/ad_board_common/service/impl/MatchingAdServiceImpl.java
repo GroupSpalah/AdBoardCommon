@@ -25,7 +25,7 @@ public class MatchingAdServiceImpl implements MatchingAdService {
 
     @Override
     public MatchingAd getById(int id) {
-        return MATCHING_AD_DAO.getById(id);
+        return MATCHING_AD_DAO.getById(MatchingAd.class, id);
     }
 
     @Override

@@ -27,4 +27,7 @@ public class Phone {
     @ManyToOne
     @JoinColumn(name = "FK_Phone_Author", nullable = false)
     Author author;//? для заполнения null в FK_Phone_Author++
+
+    @Version
+    int version;
 }

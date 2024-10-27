@@ -14,10 +14,14 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @ToString
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "ad_type")
-public abstract class AbstractAd {
+@DiscriminatorColumn(name = "entity_type")
+@Table(name = "abstract_entity")
+public abstract class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "entity_id")
     int id;
+
+    @Version
+    int version;
 }

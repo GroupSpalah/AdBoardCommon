@@ -35,7 +35,7 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Ad getById(int id) {
-        return AD_DAO.getById(id);
+        return AD_DAO.getById(Ad.class, id);
     }
 
     @Override

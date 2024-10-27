@@ -37,6 +37,9 @@ public class Author {
     Address address;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "FK_Author_Email")
+    @JoinColumn(name = "FK_Author_Entity_Email") //было FK_Author_Email
     Email email;
+
+    @Version
+    int version;
 }

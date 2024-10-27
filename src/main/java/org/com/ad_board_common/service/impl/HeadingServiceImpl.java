@@ -26,7 +26,7 @@ public class HeadingServiceImpl implements CrudService<Heading> {
 
     @Override
     public Heading getById(int id) {
-        return HEADING_DAO.getById(id);
+        return HEADING_DAO.getById(Heading.class, id);
     }
 
     @Override

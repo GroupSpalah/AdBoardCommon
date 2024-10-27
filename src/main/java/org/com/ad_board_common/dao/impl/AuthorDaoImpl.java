@@ -30,7 +30,7 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
         transaction.commit();
     }*/
 
-    @Override
+/*    @Override
     public void update(@NotNull Author author) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -40,9 +40,9 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
         em.merge(author);
 
         transaction.commit();
-    }
+    }*/
 
-    @Override
+/*    @Override
     public Author getById(int id) {
         @Cleanup
         EntityManager em = FACTORY.createEntityManager();
@@ -54,7 +54,7 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
         transaction.commit();
 
         return author;
-    }
+    }*/
 
     @Override
     public void delete(@NotNull Author author) {

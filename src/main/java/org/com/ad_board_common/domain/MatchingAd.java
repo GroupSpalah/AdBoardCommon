@@ -10,21 +10,16 @@ import java.math.BigDecimal;
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data//изучить
-@Getter
-@Setter
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@DiscriminatorValue(value = "m_ad")
-public class MatchingAd extends AbstractAd {
+@Table(name = "matching_ad")//поменять в запросе
+public class MatchingAd {
 
-//@Table(name = "matching_ad")//поменять в запросе
-
-/*    @Id
+    @Id
     @Column(name = "mad_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;*/
+    int id;
 
     @ManyToOne
     @JoinColumn(name = "FK_Mad_Author")
@@ -41,6 +36,9 @@ public class MatchingAd extends AbstractAd {
     BigDecimal priceTo;
 
     String subject;
+
+    @Version
+    int version;
 }
 
 /**

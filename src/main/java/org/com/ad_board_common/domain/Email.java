@@ -7,16 +7,17 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Email {
+@DiscriminatorValue(value = "e_address")
+public class Email extends AbstractEntity {
 
-    @Id
+/*    @Id
     @Column(name = "email_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    int id;*/
 
     @Column(name = "email_address")
     String email;

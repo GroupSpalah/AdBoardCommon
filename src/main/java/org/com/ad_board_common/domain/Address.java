@@ -7,17 +7,18 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "author")
+@DiscriminatorValue(value = "address")
+public class Address extends AbstractEntity {//изменить на другой тип базы(видео 92) адрес и емейл - общее поле id, остальное оставить как было.
 
-public class Address {
-
-    @Id
+/*    @Id
     @Column(name = "address_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    int id;*/
 
     String district;
 

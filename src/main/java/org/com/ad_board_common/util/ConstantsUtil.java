@@ -43,7 +43,7 @@ public class ConstantsUtil {
             "WHERE a.id = :ad_id";
 
     public static final String DELETE_ADDRESS = "DELETE FROM Address a" +
-            " WHERE a.id = :address_id";
+            " WHERE a.id = :address_id";//:entity_id;
 
     public static final String DELETE_AUTHOR = "DELETE FROM Author a " +
             "WHERE a.id = :author_id";

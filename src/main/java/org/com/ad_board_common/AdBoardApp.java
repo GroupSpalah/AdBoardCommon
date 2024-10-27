@@ -14,8 +14,8 @@ import org.com.ad_board_common.service.impl.MatchingAdServiceImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -102,7 +102,7 @@ public class AdBoardApp {
 
         Author john = Author
                 .builder()
-                .id(1)
+                .id(3)
                 .firstName("John")
                 .lastName("Travolta")
                 .address(johnAddress)
@@ -119,7 +119,7 @@ public class AdBoardApp {
 
         Author jack = Author
                 .builder()
-                .id(1)
+                .id(2)
                 .firstName("Jack")
                 .lastName("Nicholson")
                 .address(jackAddress)
@@ -142,18 +142,20 @@ public class AdBoardApp {
 
         Ad ad = Ad
                 .builder()
-                //.id(3)
+                .id(1)
                 .heading(phonesHeading)
                 .name("Sale Xiaomi 15")
                 .publicationDate(LocalDate.now())
                 .price(BigDecimal.valueOf(2000))
                 .content("Selling Xiaomi 15")
                 .author(john)
+                //.isActive(false)
+                .isActive(true)
                 .build();
 
         Ad ad2 = Ad
                 .builder()
-                .id(8)
+                //.id(8)
                 .heading(phonesHeading)
                 .name("Sale IPhone 13")
                 .publicationDate(LocalDate.now())
@@ -161,6 +163,7 @@ public class AdBoardApp {
                 .content("Selling iPhone 13, NEW")
                 .author(john)
                 .isActive(false)//++
+                //.isActive(true)//++
                 .build();
 
         //headingCrudService.create(phonesHeading);//++
@@ -174,20 +177,22 @@ public class AdBoardApp {
         /*проверить удаление с (mAd)*/
         //authorCrudService.delete(john);//(with Ad & mAd)++
         
+        //adService.create(ad);//++
         //adService.create(ad2);//++
-        //adService.update(ad2);//++
+        //adService.update(ad);//++
         //adService.deleteInactiveAds();//++
-        ///System.out.println(adService.getById(1));//++
+        //System.out.println(adService.getById(1));//++
         //adService.delete(ad);//++
-        //System.out.println(adService.getAdsByHeadings(Collections.singletonList(2)));//++
-        //System.out.println(adService.getAdsByHeadings(Arrays.asList(2, 52)));//++
-        //System.out.println(adService.getAdsByPublicationDate(LocalDate.of(2024, 9, 28)));//++
-        //System.out.println(adService.getAdsByAuthor(1152));//++
+        //System.out.println(adService.getAdsByHeadings(Collections.singletonList(1)));//++
+        //System.out.println(adService.getAdsByHeadings(Arrays.asList(2, 52)));//++??
+        //System.out.println(adService.getAdsByPublicationDate(LocalDate.of(2024, 10, 27)));//++
+        System.out.println(adService.getAdsByAuthor(1));//++
         //System.out.println(adService.getAdsByKeyword("new"));//++
         //System.out.println(john.getEmail());//??
         //System.out.println(john.getPhones());
 
-        MatchingAd matchingAdJohn1 = MatchingAd.builder()
+        MatchingAd matchingAdJohn1 = MatchingAd
+                .builder()
                 .author(john)
                 //.heading(phonesHeading)
                 .subject("IPhone")
@@ -195,7 +200,8 @@ public class AdBoardApp {
                 .priceTo(BigDecimal.valueOf(1000))
                 .build();
 
-        MatchingAd matchingAdJack1 = MatchingAd.builder()
+        MatchingAd matchingAdJack1 = MatchingAd
+                .builder()
                 .author(jack)
                 .heading(phonesHeading)
                 .subject("Xiaomi")
@@ -213,14 +219,14 @@ public class AdBoardApp {
 
 
         MatchingAd matchingAdJohn2 = MatchingAd.builder()
-                .id(4)
+                //.id(3)
                 .author(john)
                 .heading(phonesHeading)
                 .subject("IPhone")
                 .priceFrom(BigDecimal.valueOf(0))
                 .priceTo(BigDecimal.valueOf(1600))
                 .build();
-        //mAdService.create(matchingAdJohn2);++
+        //mAdService.create(matchingAdJohn2);//++
 
         EmailDAO EMAIL_DAO = new EmailDaoImpl();
 

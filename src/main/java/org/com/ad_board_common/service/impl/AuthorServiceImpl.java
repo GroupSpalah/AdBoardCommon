@@ -25,7 +25,7 @@ public class AuthorServiceImpl implements CrudService<Author> {
 
     @Override
     public Author getById(int id) {
-        return AUTHOR_DAO.getById(id);
+        return AUTHOR_DAO.getById(Author.class, id);
     }
 
     @Override
