@@ -33,6 +33,6 @@ Author
 - обязательно должна присутствовать валидация данных.
 
 TODO:
-1) Use @Version (добавить поле версии в сущности и изменить соответствующим образом скрипты для запроса в базу)++
+1) Add Version column to sql scripts
 2) ThreadLocal for Entitymanager(read)
-3) Refactor CRUDDao, using common methods (<T> с общей реализацией для всех сущностей)++ кроме Delete
+3) Refactor CRUDDao, using common methods (<T> с общей реализацией для всех сущностей)++

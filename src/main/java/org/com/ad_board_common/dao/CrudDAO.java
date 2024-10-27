@@ -1,9 +1,6 @@
 package org.com.ad_board_common.dao;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
 import lombok.Cleanup;
 import org.com.ad_board_common.domain.Author;
 
@@ -53,6 +50,8 @@ public interface CrudDAO<T> {
         transaction.begin();
 
         T entity = em.find(tClass, id);
+
+//        TypedQuery<T> query = em.createQuery("FROM " + tClass.getSimpleName() + " obj WHERE obj.id := " + id, tClass);
 
         transaction.commit();
 
