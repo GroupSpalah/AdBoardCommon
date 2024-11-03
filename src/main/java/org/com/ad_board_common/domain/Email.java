@@ -17,7 +17,7 @@ public class Email extends AbstractEntity {
 /*    @Id
     @Column(name = "email_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;*/
+    int id;*/ //закомментил для использования strategy @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 
     @Column(name = "email_address")
     String email;

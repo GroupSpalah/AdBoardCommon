@@ -102,7 +102,7 @@ public class AdBoardApp {
 
         Author john = Author
                 .builder()
-                .id(3)
+                .id(1)
                 .firstName("John")
                 .lastName("Travolta")
                 .address(johnAddress)
@@ -136,13 +136,13 @@ public class AdBoardApp {
 
         Heading phonesHeading = Heading
                 .builder()
-                .id(1)
+                //.id(1)
                 .name("Phones")
                 .build();
 
         Ad ad = Ad
                 .builder()
-                .id(1)
+                //.id(1)
                 .heading(phonesHeading)
                 .name("Sale Xiaomi 15")
                 .publicationDate(LocalDate.now())
@@ -165,7 +165,6 @@ public class AdBoardApp {
                 .isActive(false)//++
                 //.isActive(true)//++
                 .build();
-
         //headingCrudService.create(phonesHeading);//++
         //headingCrudService.delete(phonesHeading);//(with Ad & mAd)++
         //System.out.println(headingCrudService.getById(52).toString());//++
@@ -176,7 +175,7 @@ public class AdBoardApp {
 
         /*проверить удаление с (mAd)*/
         //authorCrudService.delete(john);//(with Ad & mAd)++
-        
+
         //adService.create(ad);//++
         //adService.create(ad2);//++
         //adService.update(ad);//++
@@ -186,7 +185,7 @@ public class AdBoardApp {
         //System.out.println(adService.getAdsByHeadings(Collections.singletonList(1)));//++
         //System.out.println(adService.getAdsByHeadings(Arrays.asList(2, 52)));//++??
         //System.out.println(adService.getAdsByPublicationDate(LocalDate.of(2024, 10, 27)));//++
-        System.out.println(adService.getAdsByAuthor(1));//++
+        //System.out.println(adService.getAdsByAuthor(1));//++
         //System.out.println(adService.getAdsByKeyword("new"));//++
         //System.out.println(john.getEmail());//??
         //System.out.println(john.getPhones());
@@ -238,6 +237,7 @@ public class AdBoardApp {
         //выводит результат по любому кол-ву установленных фильтров.
 
         //mAdService.delete(matchingAdJohn2);++
+        //System.out.println(mAdService.getById(1));
         //mAdService.update(matchingAdJohn2);//++
         //System.out.println(mAdService.getById(4));//++
     }

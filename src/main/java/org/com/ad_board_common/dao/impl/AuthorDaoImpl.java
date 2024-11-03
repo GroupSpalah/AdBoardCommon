@@ -18,44 +18,6 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
 
     MatchingAdDAO MATCHING_AD_DAO = new MatchingAdDaoImpl();
 
-    /*@Override
-    public void create(Author author) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-
-        em.persist(author);
-
-        transaction.commit();
-    }*/
-
-/*    @Override
-    public void update(@NotNull Author author) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-
-        em.merge(author);
-
-        transaction.commit();
-    }*/
-
-/*    @Override
-    public Author getById(int id) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-
-        Author author = em.find(Author.class, id);
-
-        transaction.commit();
-
-        return author;
-    }*/
-
     @Override
     public void delete(@NotNull Author author) {
         @Cleanup

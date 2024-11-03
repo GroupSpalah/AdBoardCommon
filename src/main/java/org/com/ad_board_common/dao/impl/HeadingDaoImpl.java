@@ -19,44 +19,6 @@ public class HeadingDaoImpl implements CrudDAO<Heading> {
 
     MatchingAdDAO MATCHING_AD_DAO = new MatchingAdDaoImpl();
 
-/*    @Override
-    public void create(Heading heading) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-
-        em.persist(heading);
-
-        transaction.commit();
-    }
-
-    @Override
-    public void update(@NotNull Heading heading) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-
-        em.merge(heading);
-
-        transaction.commit();
-    }
-
-    @Override
-    public Heading getById(int id) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-
-        Heading heading = em.find(Heading.class, id);
-
-        transaction.commit();
-
-        return heading;
-    }*/
-
     @Override
     public void delete(@NotNull Heading heading) {
         @Cleanup

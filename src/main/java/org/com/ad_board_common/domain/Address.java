@@ -18,7 +18,7 @@ public class Address extends AbstractEntity {//изменить на друго�
 /*    @Id
     @Column(name = "address_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;*/
+    int id;*/ //закомментил для использования strategy @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 
     String district;
 
