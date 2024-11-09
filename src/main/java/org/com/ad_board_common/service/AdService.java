@@ -5,11 +5,23 @@ import org.com.ad_board_common.domain.Ad;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Service interface for managing advertisements and implementing business logic related to advertisements.
+ * <p>
+ * This interface provides methods for managing and processing advertisements, such as:
+ * <p>
+ * - Deleting advertisements based on author or heading.
+ * <p>
+ * - Retrieving advertisements by specific criteria like publication date or keywords.
+ * <p>
+ * These methods utilize the DAO layer to access and modify the underlying data, but they
+ * allow the introduction of additional business logic and validation before interacting with the database.
+ */
 public interface AdService extends CrudService<Ad> {
 
-    void deleteAllAdByAuthorId(int authorId);
+/*    void deleteAllAdByAuthorId(int authorId);
 
-    void deleteAllAdByHeadingId(int headingId);
+    void deleteAllAdByHeadingId(int headingId);*/
 
     void deleteInactiveAds();
 

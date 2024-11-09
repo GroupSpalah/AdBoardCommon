@@ -14,13 +14,23 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+/**
+ * The AdServiceImpl class is responsible for managing ads and handling related business logic.
+ * Provides methods for CRUD operations on ads, as well as additional functions for ad management.
+ * This class interacts with the DAO layer to perform these operations.
+ */
 
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AdServiceImpl implements AdService {
 
     EmailDAO EMAIL_DAO = new EmailDaoImpl();
     AdDAO AD_DAO = new AdDaoImpl();
 
+    /**
+     * Creates a new ad and retrieves suitable emails for notification based on the ad details.
+     *
+     * @param ad the Ad object to create
+     */
     @Override
     public void create(Ad ad) {
         AD_DAO.create(ad);
@@ -43,15 +53,15 @@ public class AdServiceImpl implements AdService {
         AD_DAO.delete(ad);
     }
 
-    @Override
+/*    @Override
     public void deleteAllAdByAuthorId(int authorId) {
         AD_DAO.deleteAllAdByAuthorId(authorId);
-    }
+    }*/
 
-    @Override
+/*    @Override
     public void deleteAllAdByHeadingId(int authorId) {
         AD_DAO.deleteAllAdByHeadingId(authorId);
-    }
+    }*/
 
     @Override
     public List<Ad> getAdsByHeadings(List<Integer> headingIds) {

@@ -29,7 +29,7 @@ public class HeadingDaoImpl implements CrudDAO<Heading> {
         Heading existingHeading = em.find(Heading.class, heading.getId());
 
         AD_DAO.deleteAllAdByHeadingId(existingHeading.getId());
-        MATCHING_AD_DAO.deleteAllAdByHeadingId(existingHeading.getId());
+        MATCHING_AD_DAO.deleteAllMAdByHeadingId(existingHeading.getId());
 
         em.remove(existingHeading);
 

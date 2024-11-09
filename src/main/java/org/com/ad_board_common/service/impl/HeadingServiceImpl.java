@@ -8,6 +8,12 @@ import org.com.ad_board_common.dao.impl.HeadingDaoImpl;
 import org.com.ad_board_common.domain.Heading;
 import org.com.ad_board_common.service.CrudService;
 
+/**
+ * The HeadingServiceImpl class is responsible for managing headings and handling related business logic.
+ * Provides methods for CRUD operations on headings.
+ * This class interacts with the DAO layer to perform these operations.
+ */
+
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 
 public class HeadingServiceImpl implements CrudService<Heading> {

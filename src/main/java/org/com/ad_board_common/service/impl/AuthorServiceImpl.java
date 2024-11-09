@@ -7,6 +7,12 @@ import org.com.ad_board_common.dao.impl.AuthorDaoImpl;
 import org.com.ad_board_common.domain.Author;
 import org.com.ad_board_common.service.CrudService;
 
+/**
+ * The AuthorServiceImpl class is responsible for managing authors and handling related business logic.
+ * Provides methods for CRUD operations on authors.
+ * This class interacts with the DAO layer to perform these operations.
+ */
+
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 
 public class AuthorServiceImpl implements CrudService<Author> {

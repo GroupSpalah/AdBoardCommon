@@ -40,17 +40,3 @@ public class MatchingAd {
     @Version
     int version;
 }
-
-/**
- * Item - Mazda, priceFrom - 600, priceTo - 800, Rubric - Auto, Author - John
- * Item - Mazda, priceFrom - 600, priceTo - 800, Rubric - Auto, Author - Tom
- * <p>
- * MatchingAd{
- * <p>
- * Author - manyToOne
- * Rubric - manyToOne
- * BigDecimal priceFrom, priceTo
- * String subject
- * <p>
- * }
- */

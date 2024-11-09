@@ -14,6 +14,7 @@ import org.com.ad_board_common.service.impl.MatchingAdServiceImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -165,30 +166,30 @@ public class AdBoardApp {
                 .isActive(false)//++
                 //.isActive(true)//++
                 .build();
-        //headingCrudService.create(phonesHeading);//++
-        //headingCrudService.delete(phonesHeading);//(with Ad & mAd)++
-        //System.out.println(headingCrudService.getById(52).toString());//++
+        headingCrudService.create(phonesHeading);//++
+        headingCrudService.delete(phonesHeading);//(with Ad & mAd)++
+        System.out.println(headingCrudService.getById(52).toString());//++
 
-        //authorCrudService.create(john);//++
-        //authorCrudService.create(jack);//++ (ок после взаимоисключения полей автора и адреса)
-        //authorCrudService.update(john);//++
+        authorCrudService.create(john);//++
+        authorCrudService.create(jack);//++ (ок после взаимоисключения полей автора и адреса)
+        authorCrudService.update(john);//++
 
         /*проверить удаление с (mAd)*/
-        //authorCrudService.delete(john);//(with Ad & mAd)++
+        authorCrudService.delete(john);//(with Ad & mAd)++
 
-        //adService.create(ad);//++
-        //adService.create(ad2);//++
-        //adService.update(ad);//++
-        //adService.deleteInactiveAds();//++
-        //System.out.println(adService.getById(1));//++
-        //adService.delete(ad);//++
-        //System.out.println(adService.getAdsByHeadings(Collections.singletonList(1)));//++
-        //System.out.println(adService.getAdsByHeadings(Arrays.asList(2, 52)));//++??
-        //System.out.println(adService.getAdsByPublicationDate(LocalDate.of(2024, 10, 27)));//++
-        //System.out.println(adService.getAdsByAuthor(1));//++
-        //System.out.println(adService.getAdsByKeyword("new"));//++
-        //System.out.println(john.getEmail());//??
-        //System.out.println(john.getPhones());
+        adService.create(ad);//++
+        adService.create(ad2);//++
+        adService.update(ad);//++
+        adService.deleteInactiveAds();//++
+        System.out.println(adService.getById(1));//++
+        adService.delete(ad);//++
+        System.out.println(adService.getAdsByHeadings(Collections.singletonList(1)));//++
+        System.out.println(adService.getAdsByHeadings(Arrays.asList(2, 52)));//++??
+        System.out.println(adService.getAdsByPublicationDate(LocalDate.of(2024, 10, 27)));//++
+        System.out.println(adService.getAdsByAuthor(1));//++
+        System.out.println(adService.getAdsByKeyword("new"));//++
+        System.out.println(john.getEmail());//??
+        System.out.println(john.getPhones());
 
         MatchingAd matchingAdJohn1 = MatchingAd
                 .builder()
@@ -208,13 +209,8 @@ public class AdBoardApp {
                 .priceTo(BigDecimal.valueOf(1000))
                 .build();
 
-        //mAdService.create(matchingAdJohn1);
-        //mAdService.create(matchingAdJack1);
-
-
-
-        //проверка обработки дубликатов
-        //List с collect(Collectors.toUnmodifiableSet()) не убирает дубликаты
+        mAdService.create(matchingAdJohn1);
+        mAdService.create(matchingAdJack1);
 
 
         MatchingAd matchingAdJohn2 = MatchingAd.builder()
@@ -225,20 +221,20 @@ public class AdBoardApp {
                 .priceFrom(BigDecimal.valueOf(0))
                 .priceTo(BigDecimal.valueOf(1600))
                 .build();
-        //mAdService.create(matchingAdJohn2);//++
+        mAdService.create(matchingAdJohn2);//++
 
         EmailDAO EMAIL_DAO = new EmailDaoImpl();
 
 
-        //Set<Email> emails = EMAIL_DAO.findAllSuitableEmails(ad2);//++
-        //System.out.println(emails);
+        Set<Email> emails = EMAIL_DAO.findAllSuitableEmails(ad2);//++
+        System.out.println(emails);
 
-        //mAdService.create(matchingAdJohn2);//работает с полным или частичным совпадением.
+        mAdService.create(matchingAdJohn2);//работает с полным или частичным совпадением.
         //выводит результат по любому кол-ву установленных фильтров.
 
-        //mAdService.delete(matchingAdJohn2);++
-        //System.out.println(mAdService.getById(1));
-        //mAdService.update(matchingAdJohn2);//++
-        //System.out.println(mAdService.getById(4));//++
+        mAdService.delete(matchingAdJohn2);
+        System.out.println(mAdService.getById(1));//++
+        mAdService.update(matchingAdJohn2);//++
+        System.out.println(mAdService.getById(4));//++
     }
 }

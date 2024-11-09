@@ -7,6 +7,12 @@ import org.com.ad_board_common.dao.impl.MatchingAdDaoImpl;
 import org.com.ad_board_common.domain.MatchingAd;
 import org.com.ad_board_common.service.MatchingAdService;
 
+/**
+ * The MatchingAdServiceImpl class is responsible for managing matching ads and handling related business logic.
+ * Provides methods for CRUD operations on matching ads, as well as additional functions for matching ad management.
+ * This class interacts with the DAO layer to perform these operations.
+ */
+
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 
 public class MatchingAdServiceImpl implements MatchingAdService {
@@ -33,13 +39,13 @@ public class MatchingAdServiceImpl implements MatchingAdService {
         MATCHING_AD_DAO.delete(matchingAd);
     }
 
-    @Override
-    public void deleteAllAdByAuthorId(int authorId) {
-        MATCHING_AD_DAO.deleteAllAdByAuthorId(authorId);
+/*    @Override
+    public void deleteAllMAdByAuthorId(int authorId) {
+        MATCHING_AD_DAO.deleteAllMAdByAuthorId(authorId);
     }
 
     @Override
-    public void deleteAllAdByHeadingId(int headingId) {
-        MATCHING_AD_DAO.deleteAllAdByHeadingId(headingId);
-    }
+    public void deleteAllMAdByHeadingId(int headingId) {
+        MATCHING_AD_DAO.deleteAllMAdByHeadingId(headingId);
+    }*/
 }

@@ -28,7 +28,7 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
         Author existingAuthor = em.find(Author.class, author.getId());
 
         DAO.deleteAllAdByAuthorId(existingAuthor.getId());
-        MATCHING_AD_DAO.deleteAllAdByAuthorId(existingAuthor.getId());
+        MATCHING_AD_DAO.deleteAllMAdByAuthorId(existingAuthor.getId());
 
         Address authorAddress = existingAuthor.getAddress();
 
