@@ -1,6 +1,7 @@
 package org.com.ad_board_common;
 
 
+import org.com.ad_board_common.config.ConfigApp;
 import org.com.ad_board_common.dao.EmailDAO;
 import org.com.ad_board_common.dao.impl.EmailDaoImpl;
 import org.com.ad_board_common.domain.*;
@@ -11,6 +12,7 @@ import org.com.ad_board_common.service.impl.AdServiceImpl;
 import org.com.ad_board_common.service.impl.AuthorServiceImpl;
 import org.com.ad_board_common.service.impl.HeadingServiceImpl;
 import org.com.ad_board_common.service.impl.MatchingAdServiceImpl;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,7 +25,9 @@ import java.util.Set;
 public class AdBoardApp {
     public static void main(String[] args) {
 
-        CrudService<Heading> headingCrudService = new HeadingServiceImpl();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ConfigApp.class);
+
+        CrudService<Heading> headingCrudService = context.getBean(HeadingServiceImpl.class);
         CrudService<Author> authorCrudService = new AuthorServiceImpl();
         AdService adService = new AdServiceImpl();
         MatchingAdService mAdService = new MatchingAdServiceImpl();

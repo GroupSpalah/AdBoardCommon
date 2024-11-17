@@ -1,16 +1,18 @@
 package org.com.ad_board_common.dao.impl;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Cleanup;
 import org.com.ad_board_common.dao.AdDAO;
 import org.com.ad_board_common.domain.Ad;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.com.ad_board_common.util.ConstantsUtil.*;
 
+@Repository
 public class AdDaoImpl implements AdDAO {
 
     @Override

@@ -1,7 +1,7 @@
 package org.com.ad_board_common.domain;
 
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

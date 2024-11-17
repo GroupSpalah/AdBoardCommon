@@ -1,14 +1,14 @@
 package org.com.ad_board_common.dao.impl;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
+import javax.persistence.*;
 import lombok.Cleanup;
 import org.com.ad_board_common.dao.MatchingAdDAO;
 import org.com.ad_board_common.domain.MatchingAd;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Repository;
 
 import static org.com.ad_board_common.util.ConstantsUtil.*;
-
+@Repository
 public class MatchingAdDaoImpl implements MatchingAdDAO { //SavedSearch
 
     @Override

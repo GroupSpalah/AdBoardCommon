@@ -1,7 +1,6 @@
 package org.com.ad_board_common.dao;
 
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import javax.persistence.*;
 import org.com.ad_board_common.domain.Ad;
 import org.com.ad_board_common.domain.Email;
 import org.jetbrains.annotations.NotNull;

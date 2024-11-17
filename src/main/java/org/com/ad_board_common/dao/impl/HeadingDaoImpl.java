@@ -1,30 +1,35 @@
 package org.com.ad_board_common.dao.impl;
 
 
-import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Cleanup;
+import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.com.ad_board_common.dao.AdDAO;
 import org.com.ad_board_common.dao.CrudDAO;
 import org.com.ad_board_common.dao.MatchingAdDAO;
 import org.com.ad_board_common.domain.Heading;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Repository
+@AllArgsConstructor
+@Transactional
 public class HeadingDaoImpl implements CrudDAO<Heading> {
 
-    AdDAO AD_DAO = new AdDaoImpl();
+    AdDAO AD_DAO;
 
-    MatchingAdDAO MATCHING_AD_DAO = new MatchingAdDaoImpl();
+    MatchingAdDAO MATCHING_AD_DAO;
+
+    @PersistenceContext
+    EntityManager em;
 
     @Override
     public void delete(@NotNull Heading heading) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
 
         Heading existingHeading = em.find(Heading.class, heading.getId());
 
@@ -33,6 +38,6 @@ public class HeadingDaoImpl implements CrudDAO<Heading> {
 
         em.remove(existingHeading);
 
-        transaction.commit();
+
     }
 }

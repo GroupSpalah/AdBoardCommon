@@ -1,6 +1,6 @@
 package org.com.ad_board_common.dao;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Cleanup;
 
 import static org.com.ad_board_common.util.ConstantsUtil.UNIT_NAME;

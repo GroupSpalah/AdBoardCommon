@@ -1,6 +1,6 @@
 package org.com.ad_board_common.dao.impl;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.Cleanup;
 import lombok.experimental.FieldDefaults;

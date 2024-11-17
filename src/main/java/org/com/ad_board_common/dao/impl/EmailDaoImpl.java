@@ -1,8 +1,7 @@
 package org.com.ad_board_common.dao.impl;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.TypedQuery;
+import javax.persistence.*;
+
 import lombok.Cleanup;
 import org.com.ad_board_common.dao.EmailDAO;
 import org.com.ad_board_common.domain.Ad;
