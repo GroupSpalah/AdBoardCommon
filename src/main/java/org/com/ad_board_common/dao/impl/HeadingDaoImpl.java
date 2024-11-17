@@ -17,13 +17,17 @@ import javax.persistence.PersistenceContext;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Repository
-@AllArgsConstructor
 @Transactional
 public class HeadingDaoImpl implements CrudDAO<Heading> {
 
     AdDAO AD_DAO;
 
     MatchingAdDAO MATCHING_AD_DAO;
+
+    public HeadingDaoImpl(AdDAO AD_DAO, MatchingAdDAO MATCHING_AD_DAO) {
+        this.AD_DAO = AD_DAO;
+        this.MATCHING_AD_DAO = MATCHING_AD_DAO;
+    }
 
     @PersistenceContext
     EntityManager em;
