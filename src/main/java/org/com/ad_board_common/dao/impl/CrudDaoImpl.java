@@ -1,32 +1,25 @@
-package org.com.ad_board_common.dao;
+package org.com.ad_board_common.dao.impl;
 
-/**
- * Interface {@code CrudDAO} is a general interface for CRUD operations (create, read, update, delete)
- * in the database for any entity type.
- * Uses ``DAO'' (Data Access Object) design pattern.
- * <p>
- * <b>Note.</b> This interface requires one {@code EntityManagerFactory} element
- * to manage the object manager lifecycle.
- *
- * @param <T> the entity type for which the DAO is implemented.
- */
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
+import org.com.ad_board_common.dao.CrudDAO;
 
-public interface CrudDAO<T> {
-
+public abstract class CrudDaoImpl<T> implements CrudDAO<T> {
     /**
      * Factory for instantiating {@code EntityManager} used for management
      * database operations. Uses the configuration name `UNIT_NAME`
-     */
-    //EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory(UNIT_NAME);
+     *///refactor
 
+    @PersistenceContext
+    private EntityManager em;
 
     /**
      * Stores the new object in the database.
      *
      * @param obj an object of type {@code T} that is stored in the database.
      */
-
-    /*default*/ void create(T obj); /*{
+    @Transactional
+    public void create(T obj) {
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
@@ -34,22 +27,22 @@ public interface CrudDAO<T> {
         em.persist(obj);
 
         transaction.commit();
-    }*/
+    }
 
     /**
      * Updates an existing object in the database.
      *
      * @param obj an object of type {@code T} that is updated in the database.
      */
-
-    /*default*/ void update(T obj); /*{
+    @Transactional
+    public void update(T obj) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
         em.merge(obj);
 
         transaction.commit();
-    }*/
+    }
 
     /**
      * Returns the object by its identifier.
@@ -58,26 +51,21 @@ public interface CrudDAO<T> {
      * @param id     object identifier.
      * @return an object of type {@code T} corresponding to the given identifier.
      */
-
-    /*default*/ T getById(Class<T> tClass, int id); /*{
-*//*        @Cleanup EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = *//*
+    @Transactional
+    public T getById(Class<T> tClass, int id) {
         em.getTransaction();
-        //transaction.begin();
 
-        //T entity = em.find(tClass, id);
+        T entity = em.find(tClass, id);//?
 
         String simpleName = tClass.getSimpleName();
 
         TypedQuery<T> query = em.createQuery("FROM " + simpleName + " WHERE id = :id", tClass);
         query.setParameter("id", id);
 
-        T entity = query.getSingleResult();
-
-        //transaction.commit();
+        entity = query.getSingleResult();
 
         return entity;
-    }*/
+    }
 
     /**
      * Deletes all objects matching the specified conditions.
@@ -86,25 +74,19 @@ public interface CrudDAO<T> {
      * @param columnName the name of the query parameter corresponding to the identifier.
      * @param id         the value of the identifier to search for objects to delete.
      */
-
-    /*default*/ void deleteAllAdByParam(String request, String columnName, int id); /*{
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
+    @Transactional
+    public void deleteAllAdByParam(String request, String columnName, int id) {
+        em.getTransaction();
 
         Query query = em.createQuery(request);
         query.setParameter(columnName, id);
 
         int deletedRows = query.executeUpdate();
         System.out.println("Rows deleted: " + deletedRows);
-        transaction.commit();
+    }
+
+/*    @Transactional
+    public void delete(T obj) {
+
     }*/
-
-    /**
-     * Deletes a specific object from the database.
-     *
-     * @param obj an object of type {@code T} to be deleted from the database.
-     * @throws IllegalArgumentException if {@code obj} is {@code null}.
-     */
-    void delete(T obj);
-
 }

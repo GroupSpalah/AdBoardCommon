@@ -1,31 +1,34 @@
 package org.com.ad_board_common.dao.impl;
 
-import javax.persistence.*;
-import lombok.Cleanup;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+import lombok.NoArgsConstructor;
 import org.com.ad_board_common.dao.AdDAO;
 import org.com.ad_board_common.domain.Ad;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.com.ad_board_common.util.ConstantsUtil.*;
 
+@NoArgsConstructor
 @Repository
-public class AdDaoImpl implements AdDAO {
+@Transactional
+public class AdDaoImpl extends CrudDaoImpl<Ad> implements AdDAO {//impl??
+
+    @PersistenceContext
+    EntityManager em;
 
     @Override
     public void delete(@NotNull Ad ad) {
-        @Cleanup EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-
         Ad existingAd = em.find(Ad.class, ad.getId());
 
         em.remove(existingAd);
-
-        transaction.commit();
     }
 
     /**
@@ -54,15 +57,10 @@ public class AdDaoImpl implements AdDAO {
 
     @Override
     public void deleteInactiveAds() {
-        @Cleanup EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-
         Query query = em.createQuery(DELETE_INACTIVE_ADS);
 
         int deletedRows = query.executeUpdate();
         System.out.println("Rows deleted: " + deletedRows);
-        transaction.commit();
     }
 
     /**
@@ -123,9 +121,6 @@ public class AdDaoImpl implements AdDAO {
      * @return a list of {@link Ad} entities that match the specified filter
      */
     private List<Ad> getAdsByParam(String request, String columnName, Object obj) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
-
         TypedQuery<Ad> query = em.createQuery(request, Ad.class);
         query.setParameter(columnName, obj);
 

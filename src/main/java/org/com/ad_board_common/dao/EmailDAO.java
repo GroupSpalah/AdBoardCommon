@@ -1,13 +1,10 @@
 package org.com.ad_board_common.dao;
 
-import javax.persistence.*;
 import org.com.ad_board_common.domain.Ad;
 import org.com.ad_board_common.domain.Email;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
-
-import static org.com.ad_board_common.util.ConstantsUtil.UNIT_NAME;
 
 /**
  * The {@code EmailDAO} interface provides methods for accessing and managing
@@ -27,7 +24,9 @@ public interface EmailDAO {
      * Factory for creating {@code EntityManager} instances used to interact
      * with the persistence context.
      */
+/*
     EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory(UNIT_NAME);
+*/
 
     /**
      * Finds all suitable email records based on the criteria defined by the provided

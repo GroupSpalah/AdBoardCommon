@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.com.ad_board_common.dao.CrudDAO;
-import org.com.ad_board_common.dao.impl.HeadingDaoImpl;
 import org.com.ad_board_common.domain.Heading;
 import org.com.ad_board_common.service.CrudService;
 import org.springframework.stereotype.Service;
@@ -17,8 +16,8 @@ import org.springframework.stereotype.Service;
  */
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@Service
 @AllArgsConstructor
+@Service
 public class HeadingServiceImpl implements CrudService<Heading> {
 
     CrudDAO<Heading> HEADING_DAO;

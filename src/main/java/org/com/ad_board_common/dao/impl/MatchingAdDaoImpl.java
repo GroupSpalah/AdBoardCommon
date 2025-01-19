@@ -1,20 +1,26 @@
 package org.com.ad_board_common.dao.impl;
 
-import javax.persistence.*;
-import lombok.Cleanup;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.PersistenceContext;
 import org.com.ad_board_common.dao.MatchingAdDAO;
 import org.com.ad_board_common.domain.MatchingAd;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.com.ad_board_common.util.ConstantsUtil.*;
-@Repository
-public class MatchingAdDaoImpl implements MatchingAdDAO { //SavedSearch
+
+@Repository("matchingAdDaoImpl")
+@Transactional
+public class MatchingAdDaoImpl extends CrudDaoImpl<MatchingAd> implements MatchingAdDAO { //SavedSearch
+
+    @PersistenceContext
+    EntityManager em;
 
     @Override
     public void delete(@NotNull MatchingAd mAd) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
+
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 

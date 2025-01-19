@@ -7,7 +7,6 @@ import org.com.ad_board_common.dao.impl.EmailDaoImpl;
 import org.com.ad_board_common.domain.*;
 import org.com.ad_board_common.service.AdService;
 import org.com.ad_board_common.service.CrudService;
-import org.com.ad_board_common.service.MatchingAdService;
 import org.com.ad_board_common.service.impl.AdServiceImpl;
 import org.com.ad_board_common.service.impl.AuthorServiceImpl;
 import org.com.ad_board_common.service.impl.HeadingServiceImpl;
@@ -16,21 +15,20 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 
 public class AdBoardApp {
+
     public static void main(String[] args) {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ConfigApp.class);
 
         CrudService<Heading> headingCrudService = context.getBean(HeadingServiceImpl.class);
-        CrudService<Author> authorCrudService = new AuthorServiceImpl();
-        AdService adService = new AdServiceImpl();
-        MatchingAdService mAdService = new MatchingAdServiceImpl();
+        CrudService<Author> authorCrudService = context.getBean(AuthorServiceImpl.class);
+        AdService adService = context.getBean(AdServiceImpl.class);
+        CrudService<MatchingAd> mAdService = context.getBean(MatchingAdServiceImpl.class);
 
 
         Email johnEmail = Email
@@ -107,7 +105,7 @@ public class AdBoardApp {
 
         Author john = Author
                 .builder()
-                .id(1)
+                //.id(1)
                 .firstName("John")
                 .lastName("Travolta")
                 .address(johnAddress)
@@ -124,7 +122,7 @@ public class AdBoardApp {
 
         Author jack = Author
                 .builder()
-                .id(2)
+                //.id(2)
                 .firstName("Jack")
                 .lastName("Nicholson")
                 .address(jackAddress)
@@ -153,7 +151,7 @@ public class AdBoardApp {
                 .publicationDate(LocalDate.now())
                 .price(BigDecimal.valueOf(2000))
                 .content("Selling Xiaomi 15")
-                .author(john)
+                .author(jack)
                 //.isActive(false)
                 .isActive(true)
                 .build();
@@ -171,29 +169,29 @@ public class AdBoardApp {
                 //.isActive(true)//++
                 .build();
         headingCrudService.create(phonesHeading);//++
-        headingCrudService.delete(phonesHeading);//(with Ad & mAd)++
-        System.out.println(headingCrudService.getById(52).toString());//++
+        //headingCrudService.delete(phonesHeading);//(with Ad & mAd)++
+        //System.out.println(headingCrudService.getById(52).toString());//++
 
-        authorCrudService.create(john);//++
-        authorCrudService.create(jack);//++ (ок после взаимоисключения полей автора и адреса)
-        authorCrudService.update(john);//++
+        authorCrudService.create(john);//++//??
+        //authorCrudService.create(jack);//++ (ок после взаимоисключения полей автора и адреса)
+        //authorCrudService.update(john);//++
 
-        /*проверить удаление с (mAd)*/
-        authorCrudService.delete(john);//(with Ad & mAd)++
+        //проверить удаление с (mAd)
+        //authorCrudService.delete(john);//(with Ad & mAd)++
 
-        adService.create(ad);//++
-        adService.create(ad2);//++
-        adService.update(ad);//++
-        adService.deleteInactiveAds();//++
-        System.out.println(adService.getById(1));//++
-        adService.delete(ad);//++
-        System.out.println(adService.getAdsByHeadings(Collections.singletonList(1)));//++
-        System.out.println(adService.getAdsByHeadings(Arrays.asList(2, 52)));//++??
-        System.out.println(adService.getAdsByPublicationDate(LocalDate.of(2024, 10, 27)));//++
-        System.out.println(adService.getAdsByAuthor(1));//++
-        System.out.println(adService.getAdsByKeyword("new"));//++
-        System.out.println(john.getEmail());//??
-        System.out.println(john.getPhones());
+        //adService.create(ad);//++
+        //adService.create(ad2);//++
+        //adService.update(ad);//++
+        //adService.deleteInactiveAds();//++
+        //System.out.println(adService.getById(1));//++
+        //adService.delete(ad);//++
+        ////System.out.println(adService.getAdsByHeadings(Collections.singletonList(1)));//++
+        ////System.out.println(adService.getAdsByHeadings(Arrays.asList(2, 52)));//++??
+        ////System.out.println(adService.getAdsByPublicationDate(LocalDate.of(2024, 10, 27)));//++
+        ////System.out.println(adService.getAdsByAuthor(1));//++
+        ////System.out.println(adService.getAdsByKeyword("new"));//++
+        ////System.out.println(john.getEmail());//??
+        ////System.out.println(john.getPhones());
 
         MatchingAd matchingAdJohn1 = MatchingAd
                 .builder()
@@ -213,8 +211,8 @@ public class AdBoardApp {
                 .priceTo(BigDecimal.valueOf(1000))
                 .build();
 
-        mAdService.create(matchingAdJohn1);
-        mAdService.create(matchingAdJack1);
+        //mAdService.create(matchingAdJohn1);
+        //mAdService.create(matchingAdJack1);
 
 
         MatchingAd matchingAdJohn2 = MatchingAd.builder()
@@ -225,20 +223,20 @@ public class AdBoardApp {
                 .priceFrom(BigDecimal.valueOf(0))
                 .priceTo(BigDecimal.valueOf(1600))
                 .build();
-        mAdService.create(matchingAdJohn2);//++
+        //mAdService.create(matchingAdJohn2);//++
 
         EmailDAO EMAIL_DAO = new EmailDaoImpl();
 
 
-        Set<Email> emails = EMAIL_DAO.findAllSuitableEmails(ad2);//++
-        System.out.println(emails);
+        //Set<Email> emails = EMAIL_DAO.findAllSuitableEmails(ad2);//++
+        //System.out.println(emails);
 
-        mAdService.create(matchingAdJohn2);//работает с полным или частичным совпадением.
+        //mAdService.create(matchingAdJohn2);//работает с полным или частичным совпадением.
         //выводит результат по любому кол-ву установленных фильтров.
 
-        mAdService.delete(matchingAdJohn2);
-        System.out.println(mAdService.getById(1));//++
-        mAdService.update(matchingAdJohn2);//++
-        System.out.println(mAdService.getById(4));//++
+        //mAdService.delete(matchingAdJohn2);
+        //System.out.println(mAdService.getById(1));//++
+        //mAdService.update(matchingAdJohn2);//++
+        //System.out.println(mAdService.getById(4));//++
     }
 }

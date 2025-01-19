@@ -1,9 +1,8 @@
 package org.com.ad_board_common.domain;
 
-import lombok.experimental.FieldDefaults;
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.Set;
 
@@ -29,7 +28,8 @@ public class Author {
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 
-    @JoinColumn(name = "FK_Phone_Author")
+    @JoinColumn(name = "FK_Phone_Author")//для исключения конфликта (уже указано в Phone)
+    @EqualsAndHashCode.Exclude
     Set<Phone> phones;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "author")

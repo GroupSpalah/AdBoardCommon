@@ -19,10 +19,6 @@ import java.util.List;
  */
 public interface AdService extends CrudService<Ad> {
 
-/*    void deleteAllAdByAuthorId(int authorId);
-
-    void deleteAllAdByHeadingId(int headingId);*/
-
     void deleteInactiveAds();
 
     List<Ad> getAdsByHeadings(List<Integer> headingIds);

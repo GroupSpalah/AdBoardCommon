@@ -1,29 +1,36 @@
 package org.com.ad_board_common.dao.impl;
 
-import javax.persistence.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.AccessLevel;
-import lombok.Cleanup;
 import lombok.experimental.FieldDefaults;
 import org.com.ad_board_common.dao.AdDAO;
-import org.com.ad_board_common.dao.CrudDAO;
 import org.com.ad_board_common.dao.MatchingAdDAO;
-import org.com.ad_board_common.domain.*;
+import org.com.ad_board_common.domain.Address;
+import org.com.ad_board_common.domain.Author;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@FieldDefaults(level = AccessLevel.PRIVATE/*, makeFinal = true*/)
+@Repository("authorDaoImpl")
+@Transactional
+public class AuthorDaoImpl extends CrudDaoImpl<Author> /*implements CrudDAO<Author>*/ {
 
-public class AuthorDaoImpl implements CrudDAO<Author> {
+    final AdDAO DAO;
 
-    AdDAO DAO = new AdDaoImpl();
+    final MatchingAdDAO MATCHING_AD_DAO;
 
-    MatchingAdDAO MATCHING_AD_DAO = new MatchingAdDaoImpl();
+    public AuthorDaoImpl(AdDAO DAO, MatchingAdDAO MATCHING_AD_DAO) {
+        this.DAO = DAO;
+        this.MATCHING_AD_DAO = MATCHING_AD_DAO;
+    }
+
+    @PersistenceContext
+    EntityManager em;
 
     @Override
     public void delete(@NotNull Author author) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
 
         Author existingAuthor = em.find(Author.class, author.getId());
 
@@ -39,7 +46,5 @@ public class AuthorDaoImpl implements CrudDAO<Author> {
         }
 
         em.remove(existingAuthor);
-
-        transaction.commit();
     }
 }

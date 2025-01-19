@@ -1,14 +1,14 @@
 package org.com.ad_board_common.service.impl;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.com.ad_board_common.dao.AdDAO;
 import org.com.ad_board_common.dao.EmailDAO;
-import org.com.ad_board_common.dao.impl.AdDaoImpl;
-import org.com.ad_board_common.dao.impl.EmailDaoImpl;
 import org.com.ad_board_common.domain.Ad;
 import org.com.ad_board_common.domain.Email;
 import org.com.ad_board_common.service.AdService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,10 +21,12 @@ import java.util.Set;
  */
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Service
+@AllArgsConstructor
 public class AdServiceImpl implements AdService {
 
-    EmailDAO EMAIL_DAO = new EmailDaoImpl();
-    AdDAO AD_DAO = new AdDaoImpl();
+    EmailDAO EMAIL_DAO;
+    AdDAO AD_DAO;
 
     /**
      * Creates a new ad and retrieves suitable emails for notification based on the ad details.
@@ -52,16 +54,6 @@ public class AdServiceImpl implements AdService {
     public void delete(Ad ad) {
         AD_DAO.delete(ad);
     }
-
-/*    @Override
-    public void deleteAllAdByAuthorId(int authorId) {
-        AD_DAO.deleteAllAdByAuthorId(authorId);
-    }*/
-
-/*    @Override
-    public void deleteAllAdByHeadingId(int authorId) {
-        AD_DAO.deleteAllAdByHeadingId(authorId);
-    }*/
 
     @Override
     public List<Ad> getAdsByHeadings(List<Integer> headingIds) {

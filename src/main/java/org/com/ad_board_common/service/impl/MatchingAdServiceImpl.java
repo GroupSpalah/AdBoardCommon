@@ -1,11 +1,12 @@
 package org.com.ad_board_common.service.impl;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.com.ad_board_common.dao.MatchingAdDAO;
-import org.com.ad_board_common.dao.impl.MatchingAdDaoImpl;
+import org.com.ad_board_common.dao.CrudDAO;
 import org.com.ad_board_common.domain.MatchingAd;
-import org.com.ad_board_common.service.MatchingAdService;
+import org.com.ad_board_common.service.CrudService;
+import org.springframework.stereotype.Service;
 
 /**
  * The MatchingAdServiceImpl class is responsible for managing matching ads and handling related business logic.
@@ -14,10 +15,13 @@ import org.com.ad_board_common.service.MatchingAdService;
  */
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@AllArgsConstructor
+@Service
+public class MatchingAdServiceImpl implements CrudService<MatchingAd> {
 
-public class MatchingAdServiceImpl implements MatchingAdService {
+    //MatchingAdDAO MATCHING_AD_DAO;
 
-    MatchingAdDAO MATCHING_AD_DAO = new MatchingAdDaoImpl();
+    CrudDAO<MatchingAd> MATCHING_AD_DAO;
 
     @Override
     public void create(MatchingAd matchingAd) {
@@ -39,13 +43,4 @@ public class MatchingAdServiceImpl implements MatchingAdService {
         MATCHING_AD_DAO.delete(matchingAd);
     }
 
-/*    @Override
-    public void deleteAllMAdByAuthorId(int authorId) {
-        MATCHING_AD_DAO.deleteAllMAdByAuthorId(authorId);
-    }
-
-    @Override
-    public void deleteAllMAdByHeadingId(int headingId) {
-        MATCHING_AD_DAO.deleteAllMAdByHeadingId(headingId);
-    }*/
 }

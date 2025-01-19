@@ -1,11 +1,12 @@
 package org.com.ad_board_common.service.impl;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.com.ad_board_common.dao.CrudDAO;
-import org.com.ad_board_common.dao.impl.AuthorDaoImpl;
 import org.com.ad_board_common.domain.Author;
 import org.com.ad_board_common.service.CrudService;
+import org.springframework.stereotype.Service;
 
 /**
  * The AuthorServiceImpl class is responsible for managing authors and handling related business logic.
@@ -14,10 +15,11 @@ import org.com.ad_board_common.service.CrudService;
  */
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-
+@Service
+@AllArgsConstructor
 public class AuthorServiceImpl implements CrudService<Author> {
 
-    CrudDAO<Author> AUTHOR_DAO = new AuthorDaoImpl();
+    CrudDAO<Author> AUTHOR_DAO;
 
     @Override
     public void create(Author author) {

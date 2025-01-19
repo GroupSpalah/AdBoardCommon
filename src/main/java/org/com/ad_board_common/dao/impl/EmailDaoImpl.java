@@ -1,26 +1,30 @@
 package org.com.ad_board_common.dao.impl;
 
-import javax.persistence.*;
-
-import lombok.Cleanup;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.com.ad_board_common.dao.EmailDAO;
 import org.com.ad_board_common.domain.Ad;
 import org.com.ad_board_common.domain.Email;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.com.ad_board_common.util.ConstantsUtil.*;
 
+@Repository
 public class EmailDaoImpl implements EmailDAO {
+
+    @PersistenceContext
+    EntityManager em;
 
     @Override
     public Set<Email> findAllSuitableEmails(@NotNull Ad ad) {
-        @Cleanup
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
+
+/*        EntityTransaction transaction = em.getTransaction();
+        transaction.begin()*/;
 
         TypedQuery<Email> query = em.createQuery(SELECT_MADS_BY_PARAMS, Email.class);
                                 //mAd = Ad
@@ -29,7 +33,7 @@ public class EmailDaoImpl implements EmailDAO {
         query.setParameter(PRICE, ad.getPrice());
         query.setParameter(CONTENT, ad.getContent());
 
-        transaction.commit();
+        //transaction.commit();
         return new HashSet<>(query.getResultList());
     }
 }
