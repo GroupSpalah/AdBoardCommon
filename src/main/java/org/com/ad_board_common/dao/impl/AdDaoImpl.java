@@ -19,7 +19,7 @@ import static org.com.ad_board_common.util.ConstantsUtil.*;
 @NoArgsConstructor
 @Repository
 @Transactional
-public class AdDaoImpl extends CrudDaoImpl<Ad> implements AdDAO {//impl??
+public class AdDaoImpl extends CrudDaoImpl<Ad> implements AdDAO {
 
     @PersistenceContext
     EntityManager em;
